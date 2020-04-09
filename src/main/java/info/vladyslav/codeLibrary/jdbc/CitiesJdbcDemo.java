@@ -1,4 +1,4 @@
-package jdbc;
+package info.vladyslav.codeLibrary.jdbc;
 
 import java.sql.*;
 
@@ -6,10 +6,10 @@ public class CitiesJdbcDemo {
     /**
      * JDBC Driver and database url
      */
-//    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; // устарело лет 10-15 назад
+//    static final String JDBC_DRIVER = "com.mysql.cj.info.vladyslav.codeLibrary.jdbc.Driver"; // устарело лет 10-15 назад
 
     // ниже обязательно добавляем тайм-зону для SQL сервера → ?serverTimezone=EST5EDT
-    static final String DATABASE_URL = "jdbc:mysql://localhost/world?serverTimezone=EST5EDT";
+    static final String DATABASE_URL = "info.vladyslav.codeLibrary.jdbc:mysql://localhost/world?serverTimezone=EST5EDT";
     // "world" это название базы данных, а в ней есть таблица "city" вот с ней и будем потом работать
 
     /**
