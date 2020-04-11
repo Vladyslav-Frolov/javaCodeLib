@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DoWhileSwitch {
     public static void main(String[] args) {
-        byte n = 0;
+        byte n;
         String shape = null;
 
         Scanner sc = new Scanner(System.in);
