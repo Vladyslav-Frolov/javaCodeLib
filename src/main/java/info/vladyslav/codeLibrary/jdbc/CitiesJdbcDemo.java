@@ -2,6 +2,12 @@ package info.vladyslav.codeLibrary.jdbc;
 
 import java.sql.*;
 
+/**
+ * Надо смотреть чтобы версия сервера совпадала с версией зависимости в pom.xml.
+ * Чтобы проверить сервер нужно внести команду в консоле (при работающей связи с сервером в Идее): SELECT version();
+ * На момент написания кода версия сервера и зависимости <mysql-connector-java> 8.0.19
+ */
+
 public class CitiesJdbcDemo {
     /**
      * JDBC Driver and database url
@@ -9,14 +15,14 @@ public class CitiesJdbcDemo {
 //    static final String JDBC_DRIVER = "com.mysql.cj.info.vladyslav.codeLibrary.jdbc.Driver"; // устарело лет 10-15 назад
 
     // ниже обязательно добавляем тайм-зону для SQL сервера → ?serverTimezone=EST5EDT
-    static final String DATABASE_URL = "info.vladyslav.codeLibrary.jdbc:mysql://localhost/world?serverTimezone=EST5EDT";
+    static final String DATABASE_URL = "jdbc:mysql://localhost/world?serverTimezone=EST5EDT";
     // "world" это название базы данных, а в ней есть таблица "city" вот с ней и будем потом работать
 
     /**
      * User and Password
      */
     static final String USER = "root";
-    static final String PASSWORD = "tertey55";
+    static final String PASSWORD = "qwert";
 
     public static void main(String[] args) throws SQLException {
         Connection connection = null;
