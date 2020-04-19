@@ -1,4 +1,4 @@
-package info.vladyslav.codeLibrary.basics;
+package info.vladyslav.codeLibrary.basics.strings;
 
 public class Concatenation {
     public static void main(String[] args) {
