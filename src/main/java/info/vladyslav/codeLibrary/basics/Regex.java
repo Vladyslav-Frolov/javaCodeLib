@@ -18,6 +18,7 @@ public class Regex {
             System.out.print("Start index: " + matcher.start());
             System.out.print(" End index: " + matcher.end());
             System.out.println(" Найдено значение: " + matcher.group());
+
             System.out.println(" Ручная настройка групп: " + matcher.group(0));
         }
 
@@ -28,7 +29,11 @@ public class Regex {
             System.out.print("Start index: " + matcher2.start());
             System.out.print(" End index: " + matcher2.end());
             System.out.println(" Найдено значение: " + matcher2.group());
+
             System.out.println(" Ручная настройка групп: " + matcher2.group(0));
+            // второй способ показать результат подстроки
+            System.out.println(" Второй способ показать результат подстроки: " +
+                    text.substring(matcher2.start(), matcher2.end()));
         }
     }
 }
