@@ -5,20 +5,30 @@ import java.util.regex.Pattern;
 
 public class Regex {
     public static void main( String args[] ) {
-        String str = "Крещение Руси произошло в 988 году! Не так ли?"; // Строка для сканирования, чтобы найти шаблон
-        String regex = "(.*)(\\d+)(.*)"; // регулярное выражение
+        // Строка для сканирования, чтобы найти шаблон
+        String text = "Крещение Руси произошло в 988 году! А может быть в 1988?";
+        // регулярное выражение
+        String regex = "(\\d)+";
 
         Pattern pattern = Pattern.compile(regex); // Создание Pattern объекта
 
-        Matcher matcher = pattern.matcher(str); // Создание matcher объекта
+        Matcher matcher = pattern.matcher(text); // Создание matcher объекта
 
-        if (matcher.find( )) {
-            System.out.println("Найдено значение: " + matcher.group(0));
-            System.out.println("Найдено значение: " + matcher.group(1));
-            System.out.println("Найдено значение: " + matcher.group(2));
-            System.out.println("Найдено значение: " + matcher.group());
-        }else {
-            System.out.println("НЕ СОВПАДАЕТ");
+        while(matcher.find()){
+            System.out.print("Start index: " + matcher.start());
+            System.out.print(" End index: " + matcher.end());
+            System.out.println(" Найдено значение: " + matcher.group());
+            System.out.println(" Ручная настройка групп: " + matcher.group(0));
+        }
+
+        // Второй тип создания матчера и паттерна в одну строку
+        Matcher matcher2 = Pattern.compile(regex).matcher(text);
+
+        while(matcher2.find()) {
+            System.out.print("Start index: " + matcher2.start());
+            System.out.print(" End index: " + matcher2.end());
+            System.out.println(" Найдено значение: " + matcher2.group());
+            System.out.println(" Ручная настройка групп: " + matcher2.group(0));
         }
     }
 }
