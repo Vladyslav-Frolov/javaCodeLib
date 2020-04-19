@@ -5,14 +5,14 @@ import java.util.regex.Pattern;
 
 public class Regex {
     public static void main( String args[] ) {
-        // Строка для сканирования, чтобы найти шаблон
+        // Текст в котором будет производится поиск
         String text = "Крещение Руси произошло в 988 году! А может быть в 1988?";
-        // регулярное выражение
+        // регулярное выражение для поиска
         String regex = "(\\d)+";
 
-        Pattern pattern = Pattern.compile(regex); // Создание Pattern объекта
+        Pattern pattern = Pattern.compile(regex);
 
-        Matcher matcher = pattern.matcher(text); // Создание matcher объекта
+        Matcher matcher = pattern.matcher(text);
 
         while(matcher.find()){
             System.out.print("Start index: " + matcher.start());
