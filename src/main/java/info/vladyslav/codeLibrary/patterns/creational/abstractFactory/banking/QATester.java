@@ -1,6 +1,6 @@
 package info.vladyslav.codeLibrary.patterns.creational.abstractFactory.banking;
 
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.Tester;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.Tester;
 
 public class QATester implements Tester {
     @Override

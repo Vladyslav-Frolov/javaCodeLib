@@ -1,6 +1,6 @@
 package info.vladyslav.codeLibrary.patterns.creational.abstractFactory;
 
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.website.WebsiteTeamFactory;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.website.WebsiteTeamFactory;
 
 public class AuctionSiteProject {
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package info.vladyslav.codeLibrary.patterns.creational.abstractFactory.website;
 
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.Developer;
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.ProjectManager;
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.ProjectTeamFactory;
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.Tester;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.Developer;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.ProjectManager;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.ProjectTeamFactory;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.Tester;
 
 public class WebsiteTeamFactory implements ProjectTeamFactory {
     @Override

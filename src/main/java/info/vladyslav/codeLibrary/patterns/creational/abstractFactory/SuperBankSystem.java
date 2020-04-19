@@ -1,6 +1,6 @@
 package info.vladyslav.codeLibrary.patterns.creational.abstractFactory;
 
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.banking.BankingTeamFactory;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.banking.BankingTeamFactory;
 
 public class SuperBankSystem {
     public static void main(String[] args) {

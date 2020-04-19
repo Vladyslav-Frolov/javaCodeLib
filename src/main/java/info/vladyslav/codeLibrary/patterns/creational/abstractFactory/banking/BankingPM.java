@@ -1,6 +1,6 @@
 package info.vladyslav.codeLibrary.patterns.creational.abstractFactory.banking;
 
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.ProjectManager;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.ProjectManager;
 
 public class BankingPM implements ProjectManager {
     @Override

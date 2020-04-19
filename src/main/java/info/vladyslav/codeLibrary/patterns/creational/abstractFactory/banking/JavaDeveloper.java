@@ -1,6 +1,6 @@
 package info.vladyslav.codeLibrary.patterns.creational.abstractFactory.banking;
 
-import info.vladyslav.EPAM_HW_09_1223.creational.abstractFactory.Developer;
+import info.vladyslav.codeLibrary.patterns.creational.abstractFactory.Developer;
 
 public class JavaDeveloper implements Developer {
 
