@@ -13,6 +13,10 @@ public class ArraysBasic {
         int[] d[];
         int e[][];
 
+        // динамическая инициализация переменной одномерного массива
+        int[] arrDinamic = {1, 2, 3, 4, 5};
+        System.out.println(Arrays.toString(arrDinamic));
+
 
         // присвоение по умолчанию
         int[] arrayInt = new int[10]; // на печать выведет "0" (нули)
