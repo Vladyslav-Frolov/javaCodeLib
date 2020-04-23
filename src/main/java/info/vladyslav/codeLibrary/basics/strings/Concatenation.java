@@ -7,7 +7,7 @@ public class Concatenation {
         String c = 2 + 2 + " java " + (2 + 2); // 4 java 4
         String d = (2 + 2) + " java"; // 4 java
 
-//        String e = 2 + 2; // выдаст ошибку, нужно конкатинировать со стрингом
+//        String e = 2 + 2; // выдаст ошибку, нужно конкатенировать со стрингом
         int i = 2;
         String is = "" + i; // 2
 
