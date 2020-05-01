@@ -8,9 +8,11 @@ public class ConcatenationOperatorPriority {
         String a111 = "java " + (2 - 2.5); // java -0.5
 //        String a12 = "java " + 2 - 2; // Errors occurred while compiling
         String a121 = "java " + (2 - 2); // java 0
+
         String a2 = "java " + 2 / 2; // java 1
         String a3 = "java " + 2 * 2; // java 4
         String a4 = "java " + 2 % 2; // java 0
+
         String b = 2 + 2 + " java " + 2 + 2; // 4 java 22
         String c = 2 + 2 + " java " + (2 + 2); // 4 java 4
         String d = (2 + 2) + " java"; // 4 java
