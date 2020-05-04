@@ -1,4 +1,4 @@
-package info.vladyslav.codeLibrary.basics;
+package info.vladyslav.codeLibrary.basics.sort;
 
 import java.util.Arrays;
 
