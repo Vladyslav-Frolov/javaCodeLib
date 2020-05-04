@@ -406,3 +406,13 @@ SELECT TRUNCATE(72.0909, 1), TRUNCATE(72.0909, 2),
 
 SELECT account_id, SIGN(avail_balance), ABS(avail_balance)
 FROM account;
+
+SELECT @@global.time_zone, @@session.time_zone;
+
+SET time_zone = 'Europe/Kiev';
+
+SELECT @@global.time_zone, @@session.time_zone;
+
+use mysql;
+
+SELECT name FROM time_zone_name;
