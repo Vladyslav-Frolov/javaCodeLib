@@ -802,3 +802,32 @@ WHERE b.cust_id = c.cust_id)
 ELSE 'Unknown'
 END name
 FROM customer c;
+
+CASE customer.cust_type_cd
+WHEN 'I' THEN
+(SELECT CONCAT(i.fname, ' ', i.lname)
+FROM individual I
+WHERE i.cust_id = customer.cust_id)
+WHEN 'B' THEN
+(SELECT b.name
+FROM business b
+WHERE b.cust_id = customer.cust_id)
+ELSE 'Unknown Customer Type'
+END
+
+CASE
+WHEN customer.cust_type_cd = 'I' THEN
+(SELECT CONCAT(i.fname, ' ', i.lname)
+FROM individual I
+WHERE i.cust_id = customer.cust_id)
+WHEN customer.cust_type_cd = 'B' THEN
+(SELECT b.name
+FROM business b
+WHERE b.cust_id = customer.cust_id)
+ELSE 'Unknown Customer Type'
+END
+
+SELECT YEAR(open_date) year, COUNT(*) how_many
+FROM account
+WHERE open_date > '19991231'
+GROUP BY YEAR(open_date);
