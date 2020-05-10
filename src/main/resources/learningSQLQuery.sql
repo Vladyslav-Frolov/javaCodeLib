@@ -772,3 +772,33 @@ FROM account a
 WHERE a.cust_id = c.cust_id)
 BETWEEN 5000 AND 10000;
 
+SELECT account_id, 2*5 ds, product_cd, cust_id
+FROM account;
+
+CASE
+WHEN employee.title = 'Head Teller'
+THEN 'Head Teller'
+WHEN employee.title = 'Teller'
+AND YEAR(employee.start_date) > 2004
+THEN 'Teller Trainee'
+WHEN employee.title = 'Teller'
+AND YEAR(employee.start_date) < 2003
+THEN 'Experienced Teller'
+WHEN employee.title = 'Teller'
+THEN 'Teller'
+ELSE 'NonTeller'
+END
+
+SELECT c.cust_id, c.fed_id,
+CASE
+WHEN c.cust_type_cd = 'I' THEN
+(SELECT CONCAT(i.fname, ' ', i.lname)
+FROM individual i
+WHERE i.cust_id = c.cust_id)
+WHEN c.cust_type_cd = 'B' THEN
+(SELECT b.name
+FROM business b
+WHERE b.cust_id = c.cust_id)
+ELSE 'Unknown'
+END name
+FROM customer c;
