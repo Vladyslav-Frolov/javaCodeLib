@@ -869,19 +869,427 @@ UNION ALL
 SELECT 'Heavy Hitters' name, 10000 low_limit, 9999999.99 high_limit;
 
 SELECT groupss.name, COUNT(*) num_customers
-FROM
-(SELECT SUM(a.avail_balance) cust_balance
-FROM account a INNER JOIN product p
+FROM (SELECT SUM(a.avail_balance) cust_balance
+FROM account a
+INNER JOIN product p
   ON a.product_cd = p.product_cd
 WHERE p.product_type_cd = 'ACCOUNT'
-GROUP BY a.cust_id) cust_rollup INNER JOIN
+GROUP BY a.cust_id) cust_rollup
+INNER JOIN
 (SELECT 'Small Fry' name, 0 low_limit, 4999.99 high_limit
 UNION ALL
-SELECT 'Average Joes' name, 5000 low_limit,
-9999.99 high_limit
+SELECT 'Average Joes' name,
+5000           low_limit,
+9999.99        high_limit
 UNION ALL
-SELECT 'Heavy Hitters' name, 10000 low_limit,
-9999999.99 high_limit) groupss
+SELECT 'Heavy Hitters' name,
+10000           low_limit,
+9999999.99      high_limit) groupss
   ON cust_rollup.cust_balance
 BETWEEN groupss.low_limit AND groupss.high_limit
 GROUP BY groupss.name;
+
+SELECT SUM(a.avail_balance) cust_balance
+FROM account a
+INNER JOIN product p
+  ON a.product_cd = p.product_cd
+WHERE p.product_type_cd = 'ACCOUNT'
+GROUP BY a.cust_id;
+
+SELECT p.name                        product,
+b.name                        branch,
+CONCAT(e.fname, ' ', e.lname) name,
+SUM(a.avail_balance)          tot_deposits
+FROM account a
+INNER JOIN employee e
+  ON a.open_emp_id = e.emp_id
+INNER JOIN branch b
+  ON a.open_branch_id = b.branch_id
+INNER JOIN product p
+  ON a.product_cd = p.product_cd
+WHERE p.product_type_cd = 'ACCOUNT'
+GROUP BY p.name, b.name, e.fname, e.lname;
+
+SELECT product_cd,
+open_branch_id     branch_id,
+open_emp_id        emp_id,
+SUM(avail_balance) tot_deposits
+FROM account
+GROUP BY product_cd, open_branch_id, open_emp_id;
+
+SELECT p.name                        product,
+b.name                        branch,
+CONCAT(e.fname, ' ', e.lname) name,
+account_groups.tot_deposits
+FROM (SELECT product_cd,
+open_branch_id     branch_id,
+open_emp_id        emp_id,
+SUM(avail_balance) tot_deposits
+FROM account
+GROUP BY product_cd, open_branch_id, open_emp_id) account_groups
+INNER JOIN employee e ON e.emp_id = account_groups.emp_id
+INNER JOIN branch b ON b.branch_id = account_groups.branch_id
+INNER JOIN product p ON p.product_cd = account_groups.product_cd
+WHERE p.product_type_cd = 'ACCOUNT';
+
+SELECT open_emp_id, COUNT(*) how_many
+FROM account
+GROUP BY open_emp_id
+HAVING COUNT(*) = (SELECT MAX(emp_cnt.how_many)
+FROM (SELECT COUNT(*) how_many
+FROM account
+GROUP BY open_emp_id) emp_cnt);
+
+SELECT (SELECT p.name
+FROM product p
+WHERE p.product_cd = a.product_cd
+AND p.product_type_cd = 'ACCOUNT')  product,
+(SELECT b.name
+FROM branch b
+WHERE b.branch_id = a.open_branch_id) branch,
+(SELECT CONCAT(e.fname, ' ', e.lname)
+FROM employee e
+WHERE e.emp_id = a.open_emp_id)       name,
+SUM(a.avail_balance)                   tot_deposits
+FROM account a
+GROUP BY a.product_cd, a.open_branch_id, a.open_emp_id;
+
+SELECT all_prods.product,
+all_prods.branch,
+all_prods.name,
+all_prods.tot_deposits
+FROM (SELECT (SELECT p.name
+FROM product p
+WHERE p.product_cd = a.product_cd
+AND p.product_type_cd = 'ACCOUNT')  product,
+(SELECT b.name
+FROM branch b
+WHERE b.branch_id = a.open_branch_id) branch,
+(SELECT CONCAT(e.fname, ' ', e.lname)
+FROM employee e
+WHERE e.emp_id = a.open_emp_id)       name,
+SUM(a.avail_balance)                   tot_deposits
+FROM account a
+GROUP BY a.product_cd, a.open_branch_id, a.open_emp_id) all_prods
+WHERE all_prods.product IS NOT NULL;
+
+SELECT emp.emp_id,
+CONCAT(emp.fname, ' ', emp.lname)         emp_name,
+(SELECT CONCAT(boss.fname, ' ', boss.lname)
+FROM employee boss
+WHERE boss.emp_id = emp.superior_emp_id) boss_name
+FROM employee emp
+WHERE emp.superior_emp_id IS NOT NULL
+ORDER BY (SELECT boss.lname
+FROM employee boss
+WHERE boss.emp_id = emp.superior_emp_id), emp.lname;
+
+INSERT INTO account
+(account_id, product_cd, cust_id, open_date, last_activity_date,
+status, open_branch_id, open_emp_id, avail_balance, pending_balance)
+VALUES (NULL,
+(SELECT product_cd FROM product WHERE name = 'savings account'),
+(SELECT cust_id FROM customer WHERE fed_id = '555-55-5555'),
+'2005-01-25', '2005-01-25', 'ACTIVE',
+(SELECT branch_id FROM branch WHERE name = 'Quincy Branch'),
+(SELECT emp_id FROM employee WHERE lname = 'Portman' AND fname = 'Frank'),
+0, 0);
+
+SELECT account_id, cust_id
+FROM account;
+
+SELECT cust_id
+FROM customer;
+
+SELECT a.account_id, c.cust_id
+FROM account a
+INNER JOIN customer c
+  ON a.cust_id = c.cust_id;
+
+SELECT a.account_id, b.cust_id, b.name
+FROM account a
+INNER JOIN business b
+  ON a.cust_id = b.cust_id;
+
+SELECT cust_id, name
+FROM business;
+
+SELECT a.account_id, a.cust_id, b.name
+FROM account a
+LEFT OUTER JOIN business b
+  ON a.cust_id = b.cust_id;
+
+SELECT a.account_id, a.cust_id, i.fname, i.lname
+FROM account a
+LEFT OUTER JOIN individual i
+  ON a.cust_id = i.cust_id;
+
+SELECT c.cust_id, b.name
+FROM customer c
+LEFT OUTER JOIN business b
+  ON c.cust_id = b.cust_id;
+
+SELECT c.cust_id, b.name
+FROM customer c
+RIGHT OUTER JOIN business b
+  ON c.cust_id = b.cust_id;
+
+SELECT a.account_id,
+a.product_cd,
+CONCAT(i.fname, ' ', i.lname) person_name,
+b.name                        business_name
+FROM account a
+LEFT OUTER JOIN individual i
+  ON a.cust_id = i.cust_id
+LEFT OUTER JOIN business b
+  ON a.cust_id = b.cust_id;
+
+SELECT account_ind.account_id,
+account_ind.product_cd,
+account_ind.person_name,
+b.name business_name
+FROM (SELECT a.account_id,
+a.product_cd,
+a.cust_id,
+CONCAT(i.fname, ' ', i.lname) person_name
+FROM account a
+LEFT OUTER JOIN individual i
+  ON a.cust_id = i.cust_id) account_ind
+LEFT OUTER JOIN business b
+  ON account_ind.cust_id = b.cust_id;
+
+SELECT e.fname,
+e.lname,
+e_mgr.fname mgr_fname,
+e_mgr.lname mgr_lname
+FROM employee e
+INNER JOIN employee e_mgr
+  ON e.superior_emp_id = e_mgr.emp_id;
+
+SELECT e.fname,
+e.lname,
+e_mgr.fname mgr_fname,
+e_mgr.lname mgr_lname
+FROM employee e
+LEFT OUTER JOIN employee e_mgr
+  ON e.superior_emp_id = e_mgr.emp_id;
+
+SELECT e.fname,
+e.lname,
+e_mgr.fname mgr_fname,
+e_mgr.lname mgr_lname
+FROM employee e
+RIGHT OUTER JOIN employee e_mgr
+  ON e.superior_emp_id = e_mgr.emp_id;
+
+SELECT pt.name, p.product_cd, p.name
+FROM product p
+CROSS JOIN product_type pt;
+
+SELECT ones.num + tens.num + hundreds.num
+FROM (SELECT 0 num
+UNION ALL
+SELECT 1 num
+UNION ALL
+SELECT 2 num
+UNION ALL
+SELECT 3 num
+UNION ALL
+SELECT 4 num
+UNION ALL
+SELECT 5 num
+UNION ALL
+SELECT 6 num
+UNION ALL
+SELECT 7 num
+UNION ALL
+SELECT 8 num
+UNION ALL
+SELECT 9 num) ones
+CROSS JOIN
+(SELECT 0 num
+UNION ALL
+SELECT 10 num
+UNION ALL
+SELECT 20 num
+UNION ALL
+SELECT 30 num
+UNION ALL
+SELECT 40 num
+UNION ALL
+SELECT 50 num
+UNION ALL
+SELECT 60 num
+UNION ALL
+SELECT 70 num
+UNION ALL
+SELECT 80 num
+UNION ALL
+SELECT 90 num) tens
+CROSS JOIN
+(SELECT 0 num
+UNION ALL
+SELECT 100 num
+UNION ALL
+SELECT 200 num
+UNION ALL
+SELECT 300 num) hundreds;
+
+SELECT DATE_ADD('2004-01-01',
+INTERVAL (ones.num + tens.num + hundreds.num) DAY) dt
+FROM (SELECT 0 num
+UNION ALL
+SELECT 1 num
+UNION ALL
+SELECT 2 num
+UNION ALL
+SELECT 3 num
+UNION ALL
+SELECT 4 num
+UNION ALL
+SELECT 5 num
+UNION ALL
+SELECT 6 num
+UNION ALL
+SELECT 7 num
+UNION ALL
+SELECT 8 num
+UNION ALL
+SELECT 9 num) ones
+CROSS JOIN
+(SELECT 0 num
+UNION ALL
+SELECT 10 num
+UNION ALL
+SELECT 20 num
+UNION ALL
+SELECT 30 num
+UNION ALL
+SELECT 40 num
+UNION ALL
+SELECT 50 num
+UNION ALL
+SELECT 60 num
+UNION ALL
+SELECT 70 num
+UNION ALL
+SELECT 80 num
+UNION ALL
+SELECT 90 num) tens
+CROSS JOIN
+(SELECT 0 num
+UNION ALL
+SELECT 100 num
+UNION ALL
+SELECT 200 num
+UNION ALL
+SELECT 300 num) hundreds
+WHERE DATE_ADD('2004-01-01',
+INTERVAL (ones.num + tens.num + hundreds.num) DAY) < '2005-01-01'
+ORDER BY dt;
+
+SELECT days.dt, COUNT(a.account_id)
+FROM account a
+RIGHT OUTER JOIN
+(SELECT DATE_ADD('2004-01-01',
+INTERVAL (ones.num + tens.num + hundreds.num) DAY) dt
+FROM (SELECT 0 num
+UNION ALL
+SELECT 1 num
+UNION ALL
+SELECT 2 num
+UNION ALL
+SELECT 3 num
+UNION ALL
+SELECT 4 num
+UNION ALL
+SELECT 5 num
+UNION ALL
+SELECT 6 num
+UNION ALL
+SELECT 7 num
+UNION ALL
+SELECT 8 num
+UNION ALL
+SELECT 9 num) ones
+CROSS JOIN
+(SELECT 0 num
+UNION ALL
+SELECT 10 num
+UNION ALL
+SELECT 20 num
+UNION ALL
+SELECT 30 num
+UNION ALL
+SELECT 40 num
+UNION ALL
+SELECT 50 num
+UNION ALL
+SELECT 60 num
+UNION ALL
+SELECT 70 num
+UNION ALL
+SELECT 80 num
+UNION ALL
+SELECT 90 num) tens
+CROSS JOIN
+(SELECT 0 num
+UNION ALL
+SELECT 100 num
+UNION ALL
+SELECT 200 num
+UNION ALL
+SELECT 300 num) hundreds
+WHERE DATE_ADD('2004-01-01',
+INTERVAL (ones.num + tens.num + hundreds.num) DAY) <
+'2005-01-01') days
+  ON days.dt = a.open_date
+GROUP BY days.dt;
+
+SELECT a.account_id, a.cust_id, c.cust_type_cd, c.fed_id
+FROM account a
+NATURAL JOIN customer c;
+
+SELECT a.account_id, a.cust_id, a.open_branch_id,
+FROM account a
+NATURAL JOIN branch b;
+
+SELECT c.cust_id,
+c.fed_id,
+c.cust_type_cd,
+CONCAT(i.fname, ' ', i.lname) indiv_name,
+b.name                        business_name
+FROM customer c
+LEFT OUTER JOIN individual i
+  ON c.cust_id = i.cust_id
+LEFT OUTER JOIN business b
+  ON c.cust_id = b.cust_id;
+
+SELECT c.cust_id,
+c.fed_id,
+CASE
+WHEN c.cust_type_cd = 'I'
+THEN CONCAT(i.fname, ' ', i.lname)
+WHEN c.cust_type_cd = 'B'
+THEN b.name
+ELSE 'Unknown'
+END
+FROM customer c
+LEFT OUTER JOIN individual i
+  ON c.cust_id = i.cust_id
+LEFT OUTER JOIN business b
+  ON c.cust_id = b.cust_id;
+
+SELECT c.cust_id, c.fed_id,
+CASE
+WHEN c.cust_type_cd = 'I' THEN
+(SELECT CONCAT(i.fname, ' ', i.lname)
+FROM individual i
+WHERE i.cust_id = c.cust_id)
+WHEN c.cust_type_cd = 'B' THEN
+(SELECT b.name
+FROM business b
+WHERE b.cust_id = c.cust_id)
+ELSE 'Unknown'
+END name
+FROM customer c;
