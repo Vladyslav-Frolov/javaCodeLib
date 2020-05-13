@@ -772,90 +772,116 @@ FROM account a
 WHERE a.cust_id = c.cust_id)
 BETWEEN 5000 AND 10000;
 
-SELECT account_id, 2*5 ds, product_cd, cust_id
+SELECT account_id, 2 * 5 ds, product_cd, cust_id
 FROM account;
 
-CASE
-WHEN employee.title = 'Head Teller'
-THEN 'Head Teller'
-WHEN employee.title = 'Teller'
-AND YEAR(employee.start_date) > 2004
-THEN 'Teller Trainee'
-WHEN employee.title = 'Teller'
-AND YEAR(employee.start_date) < 2003
-THEN 'Experienced Teller'
-WHEN employee.title = 'Teller'
-THEN 'Teller'
-ELSE 'NonTeller'
-END
+SELECT account_id, account_id * cust_id ds, product_cd, cust_id
+FROM account;
 
-SELECT c.cust_id, c.fed_id,
-CASE
-WHEN c.cust_type_cd = 'I' THEN
-(SELECT CONCAT(i.fname, ' ', i.lname)
-FROM individual i
-WHERE i.cust_id = c.cust_id)
-WHEN c.cust_type_cd = 'B' THEN
-(SELECT b.name
+SELECT a.account_id, a.product_cd, a.cust_id, a.avail_balance
+FROM account a
+WHERE EXISTS(SELECT 1
+FROM transaction t
+WHERE t.account_id = a.account_id
+AND t.txn_date = '2000-01-15');
+
+SELECT t.txn_id
+FROM account a,
+transaction t
+WHERE t.account_id = a.account_id
+AND t.txn_date = '2000-01-15';
+
+SELECT a.account_id, a.product_cd, a.cust_id, a.avail_balance
+FROM account a
+WHERE EXISTS(SELECT t.txn_id, 'hello', 3.1415927
+FROM transaction t
+WHERE t.account_id = a.account_id
+AND t.txn_date = '2000-01-15');
+
+SELECT t.txn_id, 'hello', 3.1415927
+FROM account a,
+transaction t
+WHERE t.account_id = a.account_id
+AND t.txn_date = '2000-01-15';
+
+SELECT a.account_id, a.product_cd, a.cust_id
+FROM account a
+WHERE NOT EXISTS(SELECT 1
 FROM business b
-WHERE b.cust_id = c.cust_id)
-ELSE 'Unknown'
-END name
-FROM customer c;
+WHERE b.cust_id = a.cust_id);
 
-CASE customer.cust_type_cd
-WHEN 'I' THEN
-(SELECT CONCAT(i.fname, ' ', i.lname)
-FROM individual I
-WHERE i.cust_id = customer.cust_id)
-WHEN 'B' THEN
-(SELECT b.name
-FROM business b
-WHERE b.cust_id = customer.cust_id)
-ELSE 'Unknown Customer Type'
-END
+SELECT a.account_id, a.product_cd, a.cust_id
+FROM account a;
 
-CASE
-WHEN customer.cust_type_cd = 'I' THEN
-(SELECT CONCAT(i.fname, ' ', i.lname)
-FROM individual I
-WHERE i.cust_id = customer.cust_id)
-WHEN customer.cust_type_cd = 'B' THEN
-(SELECT b.name
-FROM business b
-WHERE b.cust_id = customer.cust_id)
-ELSE 'Unknown Customer Type'
-END
+UPDATE account a
+SET a.last_activity_date =
+(SELECT MAX(t.txn_date)
+FROM transaction t
+WHERE t.account_id = a.account_id);
 
-SELECT YEAR(open_date) year, COUNT(*) how_many
-FROM account
-WHERE open_date > '19991231'
-GROUP BY YEAR(open_date);
+SELECT a.last_activity_date
+FROM account a;
 
-SELECT
-SUM(CASE
-WHEN EXTRACT(YEAR FROM open_date) = 2000 THEN 1
-ELSE 0
-END) year_2000,
-SUM(CASE
-WHEN EXTRACT(YEAR FROM open_date) = 2001 THEN 1
-ELSE 0
-END) year_2001,
-SUM(CASE
-WHEN EXTRACT(YEAR FROM open_date) = 2002 THEN 1
-ELSE 0
-END) year_2002,
-SUM(CASE
-WHEN EXTRACT(YEAR FROM open_date) = 2003 THEN 1
-ELSE 0
-END) year_2003,
-SUM(CASE
-WHEN EXTRACT(YEAR FROM open_date) = 2004 THEN 1
-ELSE 0
-END) year_2004,
-SUM(CASE
-WHEN EXTRACT(YEAR FROM open_date) = 2005 THEN 1
-ELSE 0
-END) year_2005
-FROM account
-WHERE open_date > '19991231'
+UPDATE account a
+SET a.last_activity_date =
+(SELECT MAX(t.txn_date)
+FROM transaction t
+WHERE t.account_id = a.account_id)
+WHERE EXISTS(SELECT 1
+FROM transaction t
+WHERE t.account_id = a.account_id);
+
+DELETE
+FROM department
+WHERE NOT EXISTS(SELECT 1
+FROM employee
+WHERE employee.dept_id = department.dept_id);
+
+SELECT employee.emp_id
+FROM employee,
+department
+WHERE employee.dept_id = department.dept_id;
+
+SELECT d.dept_id, d.name, e_cnt.how_many num_employees
+FROM department d
+INNER JOIN
+(SELECT dept_id, COUNT(*) how_many
+FROM employee
+GROUP BY dept_id) e_cnt
+  ON d.dept_id = e_cnt.dept_id;
+
+SELECT dept_id, COUNT(*) how_many
+FROM employee
+GROUP BY dept_id;
+
+# преобразование внутреннего соединения в во внутреннее соединение без блока JOIN
+SELECT d.dept_id, d.name, e_cnt.how_many num_employees
+FROM department d,
+(SELECT dept_id, COUNT(*) how_many
+FROM employee
+GROUP BY dept_id) e_cnt
+WHERE d.dept_id = e_cnt.dept_id;
+
+SELECT 'Small Fry' name, 0 low_limit, 4999.99 high_limit
+UNION ALL
+SELECT 'Average Joes' name, 5000 low_limit, 9999.99 high_limit
+UNION ALL
+SELECT 'Heavy Hitters' name, 10000 low_limit, 9999999.99 high_limit;
+
+SELECT groupss.name, COUNT(*) num_customers
+FROM
+(SELECT SUM(a.avail_balance) cust_balance
+FROM account a INNER JOIN product p
+  ON a.product_cd = p.product_cd
+WHERE p.product_type_cd = 'ACCOUNT'
+GROUP BY a.cust_id) cust_rollup INNER JOIN
+(SELECT 'Small Fry' name, 0 low_limit, 4999.99 high_limit
+UNION ALL
+SELECT 'Average Joes' name, 5000 low_limit,
+9999.99 high_limit
+UNION ALL
+SELECT 'Heavy Hitters' name, 10000 low_limit,
+9999999.99 high_limit) groupss
+  ON cust_rollup.cust_balance
+BETWEEN groupss.low_limit AND groupss.high_limit
+GROUP BY groupss.name;
