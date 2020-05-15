@@ -1280,7 +1280,8 @@ LEFT OUTER JOIN individual i
 LEFT OUTER JOIN business b
   ON c.cust_id = b.cust_id;
 
-SELECT c.cust_id, c.fed_id,
+SELECT c.cust_id,
+c.fed_id,
 CASE
 WHEN c.cust_type_cd = 'I' THEN
 (SELECT CONCAT(i.fname, ' ', i.lname)
@@ -1293,3 +1294,132 @@ WHERE b.cust_id = c.cust_id)
 ELSE 'Unknown'
 END name
 FROM customer c;
+
+SELECT YEAR(open_date) year, COUNT(*) how_many
+FROM account
+WHERE open_date > '1999-12-31'
+GROUP BY YEAR(open_date);
+
+SELECT SUM(CASE
+WHEN EXTRACT(YEAR FROM open_date) = 2000 THEN 1
+ELSE 0
+END)        year_2000,
+SUM(CASE
+WHEN EXTRACT(YEAR FROM open_date) = 2001 THEN 1
+ELSE 0
+END) year_2001,
+SUM(CASE
+WHEN EXTRACT(YEAR FROM open_date) = 2002 THEN 1
+ELSE 0
+END) year_2002,
+SUM(CASE
+WHEN EXTRACT(YEAR FROM open_date) = 2003 THEN 1
+ELSE 0
+END) year_2003,
+SUM(CASE
+WHEN EXTRACT(YEAR FROM open_date) = 2004 THEN 1
+ELSE 0
+END) year_2004,
+SUM(CASE
+WHEN EXTRACT(YEAR FROM open_date) = 2005 THEN 1
+ELSE 0
+END) year_2005
+FROM account
+WHERE open_date > '1999-12-31';
+
+SELECT c.cust_id,
+c.fed_id,
+c.cust_type_cd,
+CASE
+WHEN EXISTS(SELECT 1
+FROM account a
+WHERE a.cust_id = c.cust_id
+AND a.product_cd = 'CHK') THEN 'Y'
+ELSE 'N'
+END has_current_account,
+CASE
+WHEN EXISTS(SELECT 1
+FROM account a
+WHERE a.cust_id = c.cust_id
+AND a.product_cd = 'SAV') THEN 'Y'
+ELSE 'N'
+END has_savings
+FROM customer c;
+
+SELECT c.cust_id,
+c.fed_id,
+c.cust_type_cd,
+CASE (SELECT COUNT(*)
+FROM account a
+WHERE a.cust_id = c.cust_id)
+WHEN 0 THEN 'None'
+WHEN 1 THEN '1'
+WHEN 2 THEN '2'
+ELSE '3+'
+END num_accounts
+FROM customer c;
+
+SELECT 100 / 0;
+
+SELECT a.cust_id,
+a.product_cd,
+a.avail_balance /
+CASE
+WHEN prod_tots.tot_balance = 0 THEN 12
+ELSE prod_tots.tot_balance
+END percent_of_total
+#        a.avail_balance,
+#        tot_balance
+FROM account a
+INNER JOIN
+(SELECT a.product_cd, SUM(a.avail_balance) tot_balance
+FROM account a
+GROUP BY a.product_cd) prod_tots
+  ON a.product_cd = prod_tots.product_cd
+ORDER BY cust_id;
+
+UPDATE account
+SET last_activity_date = CURRENT_TIMESTAMP(),
+pending_balance    = pending_balance +
+(SELECT t.amount *
+CASE t.txn_type_cd WHEN 'DBT' THEN -1 ELSE 1 END
+FROM transaction t
+WHERE t.txn_id = 999),
+avail_balance      = avail_balance +
+(SELECT CASE
+WHEN t.funds_avail_date > CURRENT_TIMESTAMP() THEN 0
+ELSE t.amount *
+CASE t.txn_type_cd WHEN 'DBT' THEN -1 ELSE 1 END
+END
+FROM transaction t
+WHERE t.txn_id = 999)
+WHERE account.account_id =
+(SELECT t.account_id
+FROM transaction t
+WHERE t.txn_id = 999);
+
+SELECT a.last_activity_date,
+a.pending_balance,
+a.avail_balance,
+a.account_id,
+t.txn_id,
+t.funds_avail_date,
+t.amount
+FROM account a
+JOIN transaction t
+  ON a.account_id = t.account_id;
+
+SELECT txn_id, funds_avail_date, amount
+FROM transaction;
+
+SELECT emp_id,
+fname,
+lname,
+CASE
+WHEN title IS NULL THEN 'Unknown'
+ELSE title
+END title
+FROM employee;
+
+SELECT (7 * 5) / ((3 + 14) * null);
+
