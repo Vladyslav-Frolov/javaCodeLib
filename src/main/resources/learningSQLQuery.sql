@@ -1423,3 +1423,53 @@ FROM employee;
 
 SELECT (7 * 5) / ((3 + 14) * null);
 
+SET AUTOCOMMIT = 0;
+
+SHOW TABLE STATUS LIKE 'transaction';
+
+START TRANSACTION;
+UPDATE product
+SET date_retired = CURRENT_TIMESTAMP()
+WHERE product_cd = 'SBL';
+SAVEPOINT before_close_accounts;
+UPDATE account
+SET status             = 'CLOSED',
+close_date         = CURRENT_TIMESTAMP(),
+last_activity_date = CURRENT_TIMESTAMP()
+WHERE product_cd = 'SBL';
+# ROLLBACK TO SAVEPOINT before_close_accounts;
+COMMIT;
+
+SELECT dept_id, name
+FROM department
+WHERE name LIKE 'A%';
+
+ALTER TABLE department
+ADD INDEX dept_name_idx (name);
+
+SHOW INDEX FROM department;
+
+DROP INDEX dept_name_idx ON department;
+
+ALTER TABLE department
+ADD UNIQUE dept_name_idx2 (name);
+
+INSERT INTO department (dept_id, name)
+VALUES (999, 'Operations');
+
+ALTER TABLE employee
+ADD INDEX emp_names_idx (lname, fname);
+
+SELECT emp_id, fname, lname
+FROM employee
+WHERE emp_id IN (1, 3, 9, 15, 22);
+
+SELECT cust_id, SUM(avail_balance) tot_bal
+FROM account
+WHERE cust_id IN (1, 5, 9, 11)
+GROUP BY cust_id;
+
+EXPLAIN SELECT cust_id, SUM(avail_balance) tot_bal
+FROM account
+WHERE cust_id IN (1, 5, 9, 11)
+GROUP BY cust_id;
