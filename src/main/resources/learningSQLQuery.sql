@@ -1473,3 +1473,107 @@ EXPLAIN SELECT cust_id, SUM(avail_balance) tot_bal
 FROM account
 WHERE cust_id IN (1, 5, 9, 11)
 GROUP BY cust_id;
+
+ALTER TABLE account
+ADD INDEX acc_bal_idx (cust_id, avail_balance);
+
+SELECT product_type_cd, name
+FROM product_type;
+
+SELECT product_type_cd, product_cd, name
+FROM product
+ORDER BY product_type_cd;
+
+UPDATE product
+SET product_type_cd = 'XYZ'
+WHERE product_type_cd = 'LOAN';
+
+UPDATE product_type
+SET product_type_cd = 'XYZ'
+WHERE product_type_cd = 'LOAN';
+
+ALTER TABLE product
+DROP FOREIGN KEY fk_product_type_cd;
+
+ALTER TABLE product
+ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
+REFERENCES product_type (product_type_cd)
+  ON UPDATE CASCADE;
+
+UPDATE product_type
+SET product_type_cd = 'XYZ'
+WHERE product_type_cd = 'LOAN';
+
+SELECT product_type_cd, product_cd, name
+FROM product
+ORDER BY product_type_cd;
+
+ALTER TABLE product
+ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
+REFERENCES product_type (product_type_cd)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE;
+
+SELECT open_emp_id, COUNT(*) how_many
+FROM account
+GROUP BY open_emp_id
+ORDER BY how_many DESC
+LIMIT 3;
+
+SELECT open_emp_id, COUNT(*) how_many
+FROM account
+GROUP BY open_emp_id
+ORDER BY how_many DESC
+LIMIT 0, 3;
+
+SELECT open_emp_id, COUNT(*) how_many
+FROM account
+GROUP BY open_emp_id
+ORDER BY how_many DESC
+LIMIT 2, 999999999;
+
+SELECT emp_id, fname, lname, start_date
+INTO OUTFILE 'd:/Documents/emp_list.txt'
+FROM employee;
+
+SELECT emp_id, fname, lname, start_date
+INTO OUTFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/emp_list_delim1.txt'
+FIELDS TERMINATED BY '//'
+FROM employee;
+
+SHOW VARIABLES LIKE "secure_file_priv";
+
+# SET VARIABLES LIKE "secure_file_priv" = 'd:/Documents/';
+
+SHOW SESSION VARIABLES LIKE "sec%";
+
+
+# DINSTALL_SECURE_FILE_PRIVDIR='d:/Documents';
+
+
+SELECT emp_id, fname, lname, start_date
+INTO OUTFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/emp_list_delim.txt'
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '@\n'
+FROM employee;
+
+CREATE TABLE branch_usage
+(branch_id SMALLINT UNSIGNED NOT NULL,
+cust_id INTEGER UNSIGNED NOT NULL,
+last_visited_on DATETIME,
+CONSTRAINT pk_branch_usage PRIMARY KEY (branch_id, cust_id)
+);
+
+INSERT INTO branch_usage (branch_id, cust_id, last_visited_on)
+VALUES (1, 5, CURRENT_TIMESTAMP( ));
+
+SELECT *
+FROM branch_usage;
+
+
+INSERT INTO branch_usage (branch_id, cust_id, last_visited_on)
+VALUES (1, 5, CURRENT_TIMESTAMP( ))
+  ON DUPLICATE KEY UPDATE last_visited_on = CURRENT_TIMESTAMP( );
+
+
+
