@@ -10,6 +10,6 @@ class CompilationOptionsInheritance extends CompilationOptions {
 //        System.out.println(CompilationOptionsInheritance.i);
 
         //компиляция успешна, т. к. статический контекст
-//        System.out.println(CompilationOptions.b); // 30
+        System.out.println(CompilationOptions.b); // 30
     }
 }
