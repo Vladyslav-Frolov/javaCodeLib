@@ -9,7 +9,10 @@ public class InitializationVariables {
     // объявление полей (в таблицах поле -> это столбец)
     private int a, b, c, d, e, f;
 
-    // будет ошибка компиляции,
+    // объявление полей с динамическим присвоением
+    int a1 = 1, b1 = 2, c1 = 3, d1 = 4;
+
+    // (!)будет ошибка компиляции,
     // a = 10;
 
     /**
@@ -23,10 +26,6 @@ public class InitializationVariables {
     }
 
     //----------------------------------------------------------------------------------
-    // объявление с динамическим присвоением
-    int a1 = 1, b1 = 2, c1 = 3, d1 = 4;
-
-    //----------------------------------------------------------------------------------
     // объявление массивов, потом, при присвоении, нужно ведялять память через new
     int nums[];
 
@@ -36,7 +35,7 @@ public class InitializationVariables {
     // объявление массива с динамичесим присвоением (всегда через new)
     char[] ch = new char[]{'b', 'c', 'd', 'e', 'f', 'g'};
 
-    // будет ошибка компиляции,
+    // (!)будет ошибка компиляции,
     // nums = new int []{1, 2};
 
     /**
@@ -55,10 +54,10 @@ public class InitializationVariables {
      */
     public static void main(String[] args) {
         // после "= new" всгеда идёт вызов конструктора со скобочками ()
-        InitializationVariables vars = new InitializationVariables(new int [10]);
+        InitializationVariables vars = new InitializationVariables(new int[10]);
+        InitializationVariables vars2 = new InitializationVariables();
 
-        System.out.println(Arrays.toString(vars.nums));
+        System.out.println(Arrays.toString(vars.nums)); // [1, 2]
+        System.out.println(vars2.a); // 10
     }
-
-
 }
