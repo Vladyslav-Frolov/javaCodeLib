@@ -26,7 +26,7 @@ public class InitializationVariables {
     }
 
     //----------------------------------------------------------------------------------
-    // объявление массивов, потом, при присвоении, нужно ведялять память через new
+    // объявление массивов, потом, при присвоении, нужно выдялять память через new
     int nums[];
 
     // объявление массива с 10 элементами, но без присвоения (всегда через new)
@@ -43,8 +43,15 @@ public class InitializationVariables {
      * можно только через конструктор
      */
 
+    // принимаемый аргумент не участвует в работе тела конструктора
     public InitializationVariables(int[] n) {
         nums = new int[]{1, 2};
+    }
+
+    // конструктор для вывода анонимных массивов, переданных в аргументах
+    public InitializationVariables(int[] n, int[] n2) {
+        System.out.print(Arrays.toString(n));
+        System.out.println(Arrays.toString(n2));
     }
 
     //----------------------------------------------------------------------------------
@@ -56,6 +63,8 @@ public class InitializationVariables {
         // после "= new" всгеда идёт вызов конструктора со скобочками ()
         InitializationVariables vars = new InitializationVariables(new int[10]);
         InitializationVariables vars2 = new InitializationVariables();
+        InitializationVariables vars3 =
+                new InitializationVariables(new int[2], new int[]{9, 10, 11}); // [0, 0][9, 10, 11]
 
         System.out.println(Arrays.toString(vars.nums)); // [1, 2]
         System.out.println(vars2.a); // 10
