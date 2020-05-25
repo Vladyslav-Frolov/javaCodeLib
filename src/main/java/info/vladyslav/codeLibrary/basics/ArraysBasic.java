@@ -13,9 +13,20 @@ public class ArraysBasic {
         int[] d[];
         int e[][];
 
-        // динамическая инициализация переменной одномерного массива
+        // дальнейшее присвоение только через new
+        i = new int[]{1, 2, 3};
+        c = new int[][]{{1, 2},{1,3}};
+        System.out.println(Arrays.toString(i));
+        System.out.println(Arrays.deepToString(c));
+
+        // этот способ ошибочен
+//        b = {1, 2, 3};
+
+        // динамическая инициализация переменной одномерного массива 2-х типов
         int[] arrDinamic = {1, 2, 3, 4, 5};
+        int[] arrDinamic2 = new int[]{6, 7, 8, 9, 10};
         System.out.println(Arrays.toString(arrDinamic));
+        System.out.println(Arrays.toString(arrDinamic2));
 
 
         // присвоение по умолчанию
