@@ -3,6 +3,18 @@ package info.vladyslav.codeLibrary.basics;
 import java.util.Arrays;
 
 public class ArraysBasic {
+    /**НЕстатический контекст*/
+    int[] i;
+    int b[];
+    int[][] c;
+    int[] arrDinamic = {1, 2, 3, 4, 5};
+    int[] arrDinamic2 = new int[]{6, 7, 8, 9, 10};
+
+//    это ошибочной подход в нестатическом контексте, в статическом это работает
+//    i = new int[]{1, 2, 3};
+//    c = new int[][]{{1, 2},{7,3}};
+
+    /**статический контекст*/
     public static void main(String[] args) {
         // объявление переменной одномерного массива, все виды
         int[] i; // ← эталонный способ
@@ -15,7 +27,7 @@ public class ArraysBasic {
 
         // дальнейшее присвоение только через new
         i = new int[]{1, 2, 3};
-        c = new int[][]{{1, 2},{1,3}};
+        c = new int[][]{{1, 2},{7,3}};
         System.out.println(Arrays.toString(i));
         System.out.println(Arrays.deepToString(c));
 
