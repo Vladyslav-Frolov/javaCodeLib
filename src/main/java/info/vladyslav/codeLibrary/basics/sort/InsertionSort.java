@@ -19,6 +19,7 @@ public class InsertionSort {
             }
         }
         System.out.println(Arrays.toString(arr));
+
 //------------------------------------------------------------
         // 2-й способ с приминением while (но это избыточно)
         boolean sorted = false;
