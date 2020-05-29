@@ -9,6 +9,7 @@ public class MergeSort {
         System.out.println(Arrays.toString(result));
     }
 
+
     public static int[] mergesort(int[] array1) {
         int[] buffer1 = Arrays.copyOf(array1, array1.length);
         int[] buffer2 = new int[array1.length];
