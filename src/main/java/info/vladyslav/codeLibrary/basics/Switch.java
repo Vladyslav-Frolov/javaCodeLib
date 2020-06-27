@@ -23,5 +23,23 @@ public class Switch {
                 break;
         }
         System.out.println(monthString);
+//-----------------------------------------------------------------
+        /**особенные случаи в switch*/
+        // default не в конце и у него нет брейка, программа сработает если провалится в деволт, но т. к. нет брейка
+        // то выведет следующий case после дефолта
+        int i = 4;
+        switch (i) {
+            case 1:
+                System.out.println("One");
+                break;
+            case 2:
+                System.out.println("Two");
+                break;
+            default:
+                System.out.println("None"); // выведется
+            case 3:
+                System.out.println("Three"); // выведется
+                break;
+        }
     }
 }
