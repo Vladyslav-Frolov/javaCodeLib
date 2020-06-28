@@ -25,6 +25,7 @@ public class Switch {
         System.out.println(monthString);
 //-----------------------------------------------------------------
         /**особенные случаи в switch*/
+
         // default не в конце и у него нет брейка, программа сработает если провалится в деволт, но т. к. нет брейка
         // то выведет следующий case после дефолта
         int i = 4;
@@ -39,6 +40,20 @@ public class Switch {
                 System.out.println("None"); // выведется
             case 3:
                 System.out.println("Three"); // выведется
+                break;
+        }
+
+        // можно указывать на 2 разных кейса один и тот же результат следующим образом (пример с 3 и 4)
+        int x = 3;
+        switch (x) {
+            default:
+                System.out.println("AAA");
+            case 2:
+                System.out.println(2);
+                break;
+            case 3:
+            case 4:
+                System.out.println("3 or 4");
                 break;
         }
     }
