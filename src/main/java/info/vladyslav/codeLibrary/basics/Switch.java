@@ -56,5 +56,6 @@ public class Switch {
                 System.out.println("3 or 4");
                 break;
         }
+
     }
 }
