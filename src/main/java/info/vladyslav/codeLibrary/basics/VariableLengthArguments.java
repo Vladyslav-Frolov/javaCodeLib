@@ -14,7 +14,9 @@ public class VariableLengthArguments {
         System.out.println(sum);
 
         VariableLengthArguments show = new VariableLengthArguments();
-        show.show("Test ", 123, " ", 'D', 'o', 'n', 'e',' ', true); // Test 123 Done true
+        show.show("Test ", 123, " ", 'D', 'o', 'n', 'e', ' ', true); // Test 123 Done true
+
+        show.print("Test " + 123 + " " + 'D' + 'o' + 'n' + 'e' + ' ' + true);
 
     }
 
@@ -33,5 +35,11 @@ public class VariableLengthArguments {
             text.append(objects[i]);
 
         System.out.print(text);
+    }
+
+    // тоже самое, что и выше, но локаничнее код без VarArgs
+    // и передавать аргументы надо будет через "+", а не через ",", т. е. конкатенировать
+    void print(Object text) {
+        System.out.println(text);
     }
 }
