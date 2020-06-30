@@ -13,12 +13,25 @@ public class VariableLengthArguments {
         sum = SumParams(1, 2, 3); // sum = 6
         System.out.println(sum);
 
+        VariableLengthArguments show = new VariableLengthArguments();
+        show.show("Test ", 123, " ", 'D', 'o', 'n', 'e',' ', true); // Test 123 Done true
+
     }
 
-    static int SumParams(int ... T) {
+    // сложение множественных аргументов
+    static int SumParams(int... T) {
         int sum = 0;
-        for (int i=0; i<T.length; i++)
+        for (int i = 0; i < T.length; i++)
             sum += T[i];
         return sum;
+    }
+
+    // для вывода чего угодно на печать, кроме объектов без ту стринг, массивов и всего того, что просто так не выводится
+    void show(Object... objects) {
+        StringBuilder text = new StringBuilder();
+        for (int i = 0; i < objects.length; i++)
+            text.append(objects[i]);
+
+        System.out.print(text);
     }
 }
