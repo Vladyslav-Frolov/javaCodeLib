@@ -66,7 +66,7 @@ public class ArraysBasic {
         System.out.println(Arrays.toString(arrayFloat)); // [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         System.out.println(Arrays.toString(arrayBool)); // [false, false, false, false, false, false, false, false, false, false]
         System.out.println(Arrays.toString(arrayStirng)); // [null, null, null, null, null, null, null, null, null, null]
-        System.out.println(Arrays.toString(arrayObject)); // [null, null, null, null, null, null, null, null, null, null]
+        System.out.println(Arrays.toString(arrayObject) + "\n"); // [null, null, null, null, null, null, null, null, null, null]
 
         // проверка присвоения из нестатического контестка через объекты
         System.out.println(Arrays.toString(arraysBasic.arrVoid)); // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
