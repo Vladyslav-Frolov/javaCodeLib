@@ -21,10 +21,7 @@ public class StringCreation {
 
         String s4 = "String"; // находится в пуле литералов
         String s5 = new String ("String"); // находится в куче
-        System.out.println(s4.compareTo(s5)); // 0 → объекты равны
-        System.out.println(s4.equals(s5)); // true
-        System.out.println(s4 == s5); // false
-        System.out.println(s4 == s5.intern()); // true // .intern() переводит объект из кучи в пул литералов
+
 
     }
 }
