@@ -1,0 +1,7 @@
+package info.vladyslav.codeLibrary.u01core.core_01_base.AbstractClasses;
+
+public abstract class AbstractClass {
+    public AbstractClass() {
+    }
+    abstract void test();
+}
