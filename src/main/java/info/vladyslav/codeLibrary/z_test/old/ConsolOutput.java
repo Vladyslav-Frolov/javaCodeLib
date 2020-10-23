@@ -1,4 +1,4 @@
-package info.vladyslav.codeLibrary.z_test;
+package info.vladyslav.codeLibrary.z_test.old;
 
 public class ConsolOutput {
     public static void main(String[] args) {

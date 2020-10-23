@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Form sample</title>
+</head>
+<body>
+
+<form id="login_form" action="/adressServletMapping" method="post">
+    <fieldset>
+        <legend>Описание филдсета</legend>
+        <!--        основной филдсет формы-->
+        <fieldset>
+            <legend>Основные импуты</legend>
+            <br/>
+
+            <input type="hidden" name="command" value="login"/>
+
+            <table>
+                <tr>
+                    <td>
+                        <div align="right">Имя:</div>
+                    </td>
+                    <td><input name="login" placeholder="любые символы"/> <br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">Пароль:</div>
+                    </td>
+                    <td><input type="password" name="password" placeholder="любые символы"/></td>
+                </tr>
+            </table>
+            <br/>
+            <input type="submit"/>
+        </fieldset>
+        <!--        конец основного филдсета формы-->
+
+        <fieldset>
+            <legend>Дополнительные импуты</legend>
+
+            <input type="radio" name="contact1"/> <br/>
+            <input type="radio" name="contact1"/> <br/>
+
+            <br/>
+            Одна из кнопок радиобаттона <br/>
+            <div>
+                <input type="radio" id="contactChoice1"
+                       name="contact" value="email">
+                <label for="contactChoice1">Email</label>
+
+                <input type="radio" id="contactChoice2"
+                       name="contact" value="phone">
+                <label for="contactChoice2">Phone</label>
+
+                <input type="radio" id="contactChoice3"
+                       name="contact" value="mail">
+                <label for="contactChoice3">Mail</label>
+            </div>
+            <br/>
+
+            <input type="checkbox"/> <br/>
+            <input type="checkbox"/> <br/>
+            <br/>
+
+            <input type="file" multiple/> <br/>
+            <br/>
+
+            прокрутка от 1 до 11, шаг 2<br/>
+            <input type="number" min="1" max="11" step="2"/> <br/>
+            <br/>
+
+            <select>
+                <option>текст 1</option>
+                <option>текст 2</option>
+            </select><br/>
+            <br/>
+
+            Горизонтальный ползунок <br/>
+            <input type="range" min="0" max="100"/> <br/>
+            <br/>
+
+            <textarea>предустановленный текст</textarea><br/>
+            <br/>
+
+            Подсказка в тексте <br/>
+            <input placeholder="mm/yy"/><br/>
+            <br/>
+
+            <progress></progress>
+            <br/>
+            <br/>
+
+            <meter></meter>
+            <br/>
+            <br/>
+
+            <input type="text" name="city" list="cities">
+            <datalist id="cities">
+                <optgroup> <!--сгруппировано в одну подгруппу-->
+                    <option>Днепр</option>
+                    <option>Днепр2</option>
+                    <option>Днепр3</option>
+                </optgroup>
+                <option>Киев</option> <!--выбор без подгруппы-->
+                <option>Одесса</option> <!--выбор без подгруппы-->
+            </datalist>
+            <br/>
+            <br/>
+            <button>Test</button>
+
+        </fieldset>
+    </fieldset>
+</form>
+<br/><br/>
+
+<div action="">asdf</div>
+<button formaction="/adressServletMapping">asdf</button>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package info.vladyslav.codeLibrary.u01core.core_01_base.BinaryOperators;
+package info.vladyslav.codeLibrary.u01core.core_01_base.bs03BinaryOperators;
 
 import java.util.Arrays;
 

@@ -5,7 +5,7 @@
         <!ELEMENT student (%elementGroup;)>
         <!ATTLIST student
                 login ID #REQUIRED
-                faculty CDATA #REQUIRED
+                faculty #PCDATA #REQUIRED
                 >
         <!ELEMENT name (#PCDATA)>
         <!ELEMENT telephone (#PCDATA)>

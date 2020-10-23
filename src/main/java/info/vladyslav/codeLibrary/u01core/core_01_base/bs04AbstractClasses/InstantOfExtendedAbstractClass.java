@@ -1,4 +1,4 @@
-package info.vladyslav.codeLibrary.u01core.core_01_base.AbstractClasses;
+package info.vladyslav.codeLibrary.u01core.core_01_base.bs04AbstractClasses;
 
 public class InstantOfExtendedAbstractClass {
     // а вот экземпляр класса, который наследуется от абстрактного создать можно

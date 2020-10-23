@@ -1,4 +1,4 @@
-package info.vladyslav.codeLibrary.u01core.core_01_base.AbstractClasses;
+package info.vladyslav.codeLibrary.u01core.core_01_base.bs04AbstractClasses;
 
 public class InstantOfAbstractClassProhibitet extends AbstractClass {
     @Override

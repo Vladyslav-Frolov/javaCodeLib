@@ -1,10 +1,11 @@
-package info.vladyslav.codeLibrary.z_test;
+package info.vladyslav.codeLibrary.z_test.old;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Z_5_Test {
+    private int i = 1;
     public static long removeByIndex(final List<Integer> list, final int k) {
         long before = System.currentTimeMillis();
         int index = k - 1;
@@ -62,4 +63,13 @@ public class Z_5_Test {
         System.out.println("LinkedList#Iterator: " + removeByIterator(linked, k) + " ms");
 
     }
+
+
 }
+/*
+class BB extends Z_5_Test{
+    public static void main(String[] args) {
+BB test = new BB();
+        System.out.println(test.i);
+    }
+}*/
