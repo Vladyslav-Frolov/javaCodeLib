@@ -5,21 +5,25 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 import static java.util.concurrent.TimeUnit.*;
+
 class BeeperControl {
-    private final ScheduledExecutorService scheduler =
-            Executors.newScheduledThreadPool(1);
+
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public void beepForAnHour() {
-        final Runnable beeper = new Runnable() {
-            public void run() { System.out.println("beep"); }
-        };
-        final ScheduledFuture<?> beeperHandle =
-                scheduler.scheduleAtFixedRate(beeper, 2, 2, SECONDS);
-        scheduler.schedule(() -> beeperHandle.cancel(true), (60 * 60), SECONDS);
+
+        final Runnable beeper = () -> System.out.println("beep");
+
+        // первая задержка 5 сек. и все последующие 1 сек.
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 5, 1, SECONDS);
+
+        // период всего выполнения 10 секунд
+        scheduler.schedule(() -> beeperHandle.cancel(true), 10 , SECONDS);
+
     }
 }
 
-class BeeperRun{
+class BeeperRun {
     public static void main(String[] args) {
         BeeperControl control = new BeeperControl();
         control.beepForAnHour();
