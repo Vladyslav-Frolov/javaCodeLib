@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE students SYSTEM-->
+<!--        "D:\Documents\Workspace\code-library-Vladyslav\src\main\java\info\vladyslav\codelibrary\u03web\web02xml\xml_02_xsd\xsd_01\students.xsd">&lt;!&ndash;добавление проверки на валидность по схеме xsd&ndash;&gt;-->
+
+<!--строчка 7 и 9 должны совпадать с targetNamespace-->
+<!--сточка 8 должна быть ссылкой на "http://www.w3.org/2001/XMLSchema-instance"-->
+<students xmlns="http://www.example.com/students"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.example.com/students students.xsd">
+    <student login="MitarAlex7" faculty="mmf">
+        <name>Mitar Alex</name>
+        <telephone>2456474</telephone>
+        <address>
+            <country>Belarus</country>
+            <city>Minsk</city>
+            <street>Kalinovsky 45</street>
+        </address>
+    </student>
+    <student login="Pashkin5" faculty="mmf">
+        <name>Pashkin Alex</name>
+        <telephone>3453789</telephone>
+        <address>
+            <country>Belarus</country>
+            <city>Brest</city>
+            <street>Knorina 56</street>
+        </address>
+    </student>
+</students>
