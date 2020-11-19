@@ -1,4 +1,4 @@
-package info.vladyslav.springcore;
+package com.yet.spring.core;
 
 public class Client {
     private String id;

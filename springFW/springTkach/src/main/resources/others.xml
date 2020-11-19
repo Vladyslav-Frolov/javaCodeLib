@@ -21,7 +21,7 @@
         <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
-    <bean id="client" class="info.vladyslav.springcore.Client" c:id="${id}" c:fullName="${name}"
+    <bean id="client" class="com.yet.spring.core.Client" c:id="${id}" c:fullName="${name}"
           p:greeting="${greeting}">
         <!--                <constructor-arg index="0" type="java.lang.String" value="${id}"/>-->
         <!--                <constructor-arg index="1" type="java.lang.String" value="${name}"/>-->
@@ -29,11 +29,11 @@
         <!--        <property name="greeting" value="${greeting}"/>-->
 
         <!--        <property name="greeting">-->
-        <!--            <bean class="info.vladyslav.springcore.Event"/>-->
+        <!--            <bean class="springcore.Event"/>-->
         <!--        </property>-->
     </bean>
 
-    <bean id="app" class="info.vladyslav.springcore.App">
+    <bean id="app" class="com.yet.spring.core.App">
 
         <constructor-arg ref="client"/>
         <!--        <constructor-arg ref="eventLogger"/>-->
@@ -46,7 +46,7 @@
 
     </bean>
 
-    <bean id="event" class="info.vladyslav.springcore.Event" scope="prototype">
+    <bean id="event" class="com.yet.spring.core.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>

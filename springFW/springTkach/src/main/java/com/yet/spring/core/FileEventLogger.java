@@ -1,4 +1,4 @@
-package info.vladyslav.springcore;
+package com.yet.spring.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class FileEventLogger implements EventLogger {
 
     public void init() throws IOException {
 //        try (PrintWriter writer = new PrintWriter(fileName)) {
-//            writer.print("init");
+//            writer.print("");
 //        } catch (IOException e) {
 //            LOGGER.log(Level.INFO, String.format("%s can`t write file %s", e, fileName));
 //        }

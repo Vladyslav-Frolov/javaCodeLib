@@ -11,19 +11,19 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-    <bean id="consoleEventLogger" class="info.vladyslav.springcore.ConsoleEventLogger"/>
+    <bean id="consoleEventLogger" class="com.yet.spring.core.ConsoleEventLogger"/>
 
-    <bean id="fileEventLogger" class="info.vladyslav.springcore.FileEventLogger" init-method="init">
+    <bean id="fileEventLogger" class="com.yet.spring.core.FileEventLogger" init-method="init">
         <constructor-arg type="java.lang.String" value="D:\Documents\Workspace\myCodeLib\javaMain\springFW\springTkach\logReport.txt"/>
     </bean>
 
-    <bean id="cacheFileEventLogger" class="info.vladyslav.springcore.CacheFileEventLogger" parent="fileEventLogger"
+    <bean id="cacheFileEventLogger" class="com.yet.spring.core.CacheFileEventLogger" parent="fileEventLogger"
           init-method="init" destroy-method="destroy">
         <constructor-arg value="5"/>
         <!--        <constructor-arg value="D:\Documents\Workspace\myCodeLib\javaMain\springFW\tkach\logReport.txt"/>-->
     </bean>
 
-    <bean id="combinedEventLogger" class="info.vladyslav.springcore.CombinedEventLogger">
+    <bean id="combinedEventLogger" class="com.yet.spring.core.CombinedEventLogger">
         <constructor-arg>
             <list>
                 <ref bean="consoleEventLogger"/>
