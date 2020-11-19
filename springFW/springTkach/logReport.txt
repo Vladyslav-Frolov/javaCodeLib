@@ -9,3 +9,5 @@ Event{id=71392, msg='Some event for user John Smith', date=19.11.2020 20:33:48}
 Event{id=71633, msg='3333 Some event for user John Smith', date=19.11.2020 20:33:48}
 Event{id=21936, msg='Some event for user John Smith', date=19.11.2020 20:55:32}
 Event{id=12116, msg='3333 Some event for user John Smith', date=19.11.2020 20:55:32}
+Event{id=16291, msg='Some event for user John Smith', date=19.11.2020 20:59:48}
+Event{id=44792, msg='3333 Some event for user John Smith', date=19.11.2020 20:59:48}
