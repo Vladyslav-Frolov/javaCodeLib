@@ -13,6 +13,8 @@ public class Z_7 {
         authorizedCommands.add("toBook");
 
     }
+
+    // test commands for existence
     public static boolean isAuthorized(String commandName) {
         return authorizedCommands.contains(commandName);
     }
