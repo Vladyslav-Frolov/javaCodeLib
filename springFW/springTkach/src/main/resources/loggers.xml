@@ -14,7 +14,7 @@
     <bean id="consoleEventLogger" class="info.vladyslav.springcore.ConsoleEventLogger"/>
 
     <bean id="fileEventLogger" class="info.vladyslav.springcore.FileEventLogger" init-method="init">
-        <constructor-arg type="java.lang.String" value="D:\Documents\Workspace\myCodeLib\javaMain\springFW\tkach\logReport.txt"/>
+        <constructor-arg type="java.lang.String" value="D:\Documents\Workspace\myCodeLib\javaMain\springFW\springTkach\logReport.txt"/>
     </bean>
 
     <bean id="cacheFileEventLogger" class="info.vladyslav.springcore.CacheFileEventLogger" parent="fileEventLogger"
