@@ -14,9 +14,10 @@ public class MusicSpring {
 //       MusicPlayer musicPlayer = new MusicPlayer(music);
 
         MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-        musicPlayer.playMusic();
+        musicPlayer.playListMusic();
 
-//        System.out.println(testBean.getName());
+        System.out.println(musicPlayer.getName());
+        System.out.println(musicPlayer.getVolume());
 
         context.close();
     }
