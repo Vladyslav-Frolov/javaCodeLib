@@ -14,7 +14,10 @@
 
 
     <bean id="classicalMusic"
-          class="info.vld.alishev.a02music.ClassicalMusic">
+          class="info.vld.alishev.a02music.ClassicalMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy"
+          factory-method="getClassicalMusic">
     </bean>
 
     <bean id="rockMusic"
