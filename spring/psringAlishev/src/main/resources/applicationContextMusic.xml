@@ -25,7 +25,7 @@
           class="info.vld.alishev.a02music.JazzMusic">
     </bean>
 
-    <bean id="musicPlayer" class="info.vld.alishev.a02music.MusicPlayer">
+    <bean id="musicPlayer" class="info.vld.alishev.a02music.MusicPlayer" scope="prototype">
         <property name="musicList">
             <list>
                 <ref bean="classicalMusic"/>
