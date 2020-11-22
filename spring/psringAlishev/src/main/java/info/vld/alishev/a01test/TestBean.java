@@ -1,4 +1,4 @@
-package info.vld.alishev;
+package info.vld.alishev.a01test;
 
 public class TestBean {
     private String name;
