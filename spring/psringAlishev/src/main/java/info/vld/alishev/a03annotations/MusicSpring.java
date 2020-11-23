@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MusicSpring {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContextNewMusic.xml"
+                "applicationContext2Music.xml"
         );
 
         Music music = context.getBean("rockMusic", Music.class);

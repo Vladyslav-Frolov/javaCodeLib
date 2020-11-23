@@ -1,11 +1,11 @@
-package info.vld.alishev.a04autowired;
+package info.vld.alishev.a05qualifier;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MusicSpring {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext3Music.xml"
+                "applicationContext4Music.xml"
         );
 
 //        Music music = context.getBean("rockMusic", Music.class);

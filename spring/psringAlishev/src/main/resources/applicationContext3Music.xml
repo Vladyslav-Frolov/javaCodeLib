@@ -7,6 +7,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="info.vld.alishev.a03annotations"/>
+    <context:component-scan base-package="info.vld.alishev.a04autowired"/>
 
 </beans>

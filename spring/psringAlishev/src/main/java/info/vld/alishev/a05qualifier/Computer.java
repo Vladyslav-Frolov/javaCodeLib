@@ -1,4 +1,4 @@
-package info.vld.alishev.a04autowired;
+package info.vld.alishev.a05qualifier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,6 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "Computer " + id + " play: " + musicPlayer.playMusic();
+        return "Computer " + id + " " + musicPlayer.playMusic();
     }
 }
