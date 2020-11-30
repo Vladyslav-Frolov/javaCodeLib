@@ -1,4 +1,4 @@
-package io.spring.tutorials.hello;
+package io.spring.tutorials.model;
 
 public class Greeting {
 
