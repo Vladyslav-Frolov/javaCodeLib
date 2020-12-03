@@ -11,8 +11,9 @@
 
     <modules>
         <module>springTkach</module>
-        <module>psringAlishev</module>
+        <module>springAlishev</module>
         <module>springIoTutorial</module>
+        <module>springBorisov</module>
     </modules>
 
     <properties>
