@@ -9,4 +9,6 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
         <property name="message" value="I'll be back"/>
     </bean>
 
+    <bean class="com.spring.borisov.InjectRandomIntAnnotationBeanPostProcessor"/>
+
 </beans>
