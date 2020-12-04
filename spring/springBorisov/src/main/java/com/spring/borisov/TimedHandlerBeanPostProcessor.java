@@ -11,19 +11,20 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
+public class TimedHandlerBeanPostProcessor implements BeanPostProcessor {
     private Map<String, Class> map = new HashMap<>();
-    private ProfilingController controller = new ProfilingController();
+    private TimedController controller = new TimedController();
 
-    public ProfilingHandlerBeanPostProcessor() throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
+    // not Spring technology, only for jvisualvm.exe
+    public TimedHandlerBeanPostProcessor() throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
         MBeanServer platformMBeanServer = ManagementFactory.getPlatformMBeanServer();
-        platformMBeanServer.registerMBean(controller, new ObjectName("profiling", "name", "controller"));
+        platformMBeanServer.registerMBean(controller, new ObjectName("timed", "name", "controller"));
     }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Class<?> beanClass = bean.getClass();
-        if (beanClass.isAnnotationPresent(Profiling.class)) {
+        if (beanClass.isAnnotationPresent(Timed.class)) {
             map.put(beanName, beanClass);
         }
         return bean;
@@ -38,12 +39,12 @@ public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
                         @Override
                         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                             if (controller.isEnabled()) {
-                                System.out.println("Profiling...");
+                                System.out.println("Timed start...");
                                 long before = System.nanoTime();
                                 Object retVal = method.invoke(bean, args);
                                 long after = System.nanoTime();
                                 System.out.println(after - before);
-                                System.out.println("The end");
+                                System.out.println("Timed end");
                                 return retVal;
                             }else{
                                 return method.invoke(bean, args);

@@ -2,7 +2,7 @@ package com.spring.borisov;
 
 import javax.annotation.PostConstruct;
 
-@Profiling
+@Timed
 public class TerminatorQuoter implements Quoter {
 
     @InjectRandomInt(min =  1, max = 4)

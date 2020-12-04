@@ -1,6 +1,7 @@
 package com.spring.borisov;
 
-public interface ProfilingControllerMBean {
+// jvisualvm.exe
+public interface TimedControllerMBean {
     public void setEnabled(boolean enabled);
 
 }

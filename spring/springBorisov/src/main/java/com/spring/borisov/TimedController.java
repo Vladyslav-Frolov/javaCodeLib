@@ -1,7 +1,8 @@
 package com.spring.borisov;
 
-public class ProfilingController implements ProfilingControllerMBean {
-    private boolean enabled;
+// for jvisualvm.exe
+public class TimedController implements TimedControllerMBean {
+    private boolean enabled = true;
 
     public boolean isEnabled() {
         return enabled;

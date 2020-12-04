@@ -14,7 +14,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.spri
 <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
 
 <!--    <context:annotation-config/>-->
+
     <context:component-scan base-package="com.spring.borisov"/>
 
-    <bean class="com.spring.borisov.ProfilingHandlerBeanPostProcessor"/>
+    <bean class="com.spring.borisov.TimedHandlerBeanPostProcessor"/>
 </beans>
