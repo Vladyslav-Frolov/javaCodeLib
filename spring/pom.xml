@@ -14,6 +14,9 @@
         <module>springAlishev</module>
         <module>springIoTutorial</module>
         <module>springBorisov</module>
+        <module>spingSysoutRu</module>
+        <module>springSysoutRu</module>
+        <module>springMyCode</module>
     </modules>
 
     <properties>
