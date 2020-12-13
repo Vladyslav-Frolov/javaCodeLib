@@ -1,6 +1,6 @@
 package info.vladyslav.cl.javaBasics.u01core.core_07_lambda.lmbd_01_base;
 
-public class Lavbda03Block {
+public class Lambda03Block {
     public static void main(String[] args) {
         NumericFunc factorial = n -> {
             int result = 1;
