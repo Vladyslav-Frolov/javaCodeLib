@@ -11,9 +11,9 @@ public class Lambda01Basic {
         };
 
         /** тот же код, но без лямбды — анонимный класс*/
-        MyNumber myNumber3 = new MyNumber() {  // остаётся только (), далее идёт ->
+        MyNumber myNumber3 = new MyNumber() {   // тут ничего не остаётся
             @Override
-            public double getValue() {
+            public double getValue() {          // остаётся только (), далее идёт ->
                 return 123.45;                  // остается только 123.45
             }
         };
