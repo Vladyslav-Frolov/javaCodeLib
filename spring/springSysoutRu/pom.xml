@@ -10,10 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>springSysoutRu</artifactId>
-
     <version>1.0-SNAPSHOT</version>
-
-    <packaging>war</packaging>
 
     <properties>
         <spring.version>5.2.11.RELEASE</spring.version>
@@ -35,7 +32,6 @@
             <version>${spring.boot.starter.version}</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,7 +40,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -52,7 +47,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
