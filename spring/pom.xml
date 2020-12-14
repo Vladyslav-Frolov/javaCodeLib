@@ -16,6 +16,7 @@
         <module>springBorisov</module>
         <module>springSysoutRu</module>
         <module>springMyCode</module>
+        <module>springBaeldung</module>
     </modules>
 
     <properties>
