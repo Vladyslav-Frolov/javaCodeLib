@@ -1,6 +1,7 @@
 package com.spring.integration.main;
 
 import com.spring.integration.config.BasicIntegrationConfig;
+import com.spring.integration.config.IntegrationConfigDsl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class SIMain {
     public static void main(final String... args) {
-        final AbstractApplicationContext context = new AnnotationConfigApplicationContext(BasicIntegrationConfig.class);
+        final AbstractApplicationContext context = new AnnotationConfigApplicationContext(IntegrationConfigDsl.class);
         context.registerShutdownHook();
         final Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter a string and press <enter>: ");

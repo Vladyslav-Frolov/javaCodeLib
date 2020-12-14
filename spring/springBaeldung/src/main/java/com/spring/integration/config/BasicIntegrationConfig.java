@@ -19,52 +19,24 @@ import org.springframework.messaging.MessageHandler;
 
 import java.io.File;
 
+// данный пример берёт файл из папки test и перекладывает в папку test.1
 @Configuration
 @EnableIntegration // аннотация означает, что это класс конфигурации Spring Integration.
-public class BasicIntegrationConfig{
+public class BasicIntegrationConfig {
     public String INPUT_DIR = "C:\\Users\\Владислав\\Desktop\\test";
     public String OUTPUT_DIR = "C:\\Users\\Владислав\\Desktop\\test\\1";
     public String FILE_PATTERN = "*.docx";
+
+    // ===============================================================
+    // превый урок конфигурация интегрейшин через java --> для копирование файла в другую папку
+    // ===============================================================
 
     @Bean // канал интеграции P-to-P
     public MessageChannel fileChannel() {
         return new DirectChannel();
     }
 
-    @Bean // канал интеграции Pub-Sub
-    public MessageChannel pubSubFileChannel() {
-        return new PublishSubscribeChannel();
-    }
-
-    // 3 моста для подключения от Pub-Sub к P-to-P (т. к. на прямую они не подключаются)
-    @Bean
-    @BridgeFrom(value = "pubSubFileChannel")
-    public MessageChannel fileChannel1() {
-        return new DirectChannel();
-    }
-
-    @Bean
-    @BridgeFrom(value = "pubSubFileChannel")
-    public MessageChannel fileChannel2() {
-        return new DirectChannel();
-    }
-
-    @Bean
-    @BridgeFrom(value = "pubSubFileChannel")
-    public MessageChannel fileChannel3() {
-        return new DirectChannel();
-    }
-
-/*    @Bean // адаптер входящего канала для P-to-P
-    @InboundChannelAdapter(value = "fileChannel", poller = @Poller(fixedDelay = "1000"))
-    public MessageSource<File> fileReadingMessageSource() {
-        FileReadingMessageSource sourceReader= new FileReadingMessageSource();
-        sourceReader.setDirectory(new File(INPUT_DIR));
-        sourceReader.setFilter(new SimplePatternFileListFilter(FILE_PATTERN));
-        return sourceReader;
-    }*/
-
-    @Bean // адаптер входящего канала для Pub-Sub
+    @Bean // адаптер входящего канала
     @InboundChannelAdapter(value = "fileChannel", poller = @Poller(fixedDelay = "1000"))
     public MessageSource<File> fileReadingMessageSource() {
         FileReadingMessageSource sourceReader = new FileReadingMessageSource();
@@ -82,5 +54,37 @@ public class BasicIntegrationConfig{
         return handler;
     }
 
+/*    @Bean // канал интеграции Pub-Sub
+    public MessageChannel pubSubFileChannel() {
+        return new PublishSubscribeChannel();
+    }*/
+
+    // 3 моста для подключения от Pub-Sub к P-to-P (т. к. на прямую они не подключаются)
+/*    @Bean
+    @BridgeFrom(value = "pubSubFileChannel")
+    public MessageChannel fileChannel1() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    @BridgeFrom(value = "pubSubFileChannel")
+    public MessageChannel fileChannel2() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    @BridgeFrom(value = "pubSubFileChannel")
+    public MessageChannel fileChannel3() {
+        return new DirectChannel();
+    }*/
+
+/*    @Bean // адаптер входящего канала для P-to-P
+    @InboundChannelAdapter(value = "fileChannel", poller = @Poller(fixedDelay = "1000"))
+    public MessageSource<File> fileReadingMessageSource() {
+        FileReadingMessageSource sourceReader= new FileReadingMessageSource();
+        sourceReader.setDirectory(new File(INPUT_DIR));
+        sourceReader.setFilter(new SimplePatternFileListFilter(FILE_PATTERN));
+        return sourceReader;
+    }*/
 
 }
