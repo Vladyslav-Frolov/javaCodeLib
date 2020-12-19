@@ -46,7 +46,7 @@ public class BasicIntegrationConfig {
     }
 
     @Bean // активатор службы --> получает файл из настроенного входного канала и записывает его в настроенную папку
-    @ServiceActivator(inputChannel= "fileChannel")
+    @ServiceActivator(inputChannel = "fileChannel") // можно добавить и исходящий канал
     public MessageHandler fileWritingMessageHandler() {
         FileWritingMessageHandler handler = new FileWritingMessageHandler(new File(OUTPUT_DIR));
         handler.setFileExistsMode(FileExistsMode.REPLACE);
