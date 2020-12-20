@@ -1,4 +1,4 @@
-package com.spting.batch;
+package com.spring.batch;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +12,12 @@ public class SingeritemProcessor implements ItemProcessor<Singer, Singer> {
 
     @Override
     public Singer process(Singer singer) throws Exception {
+        Integer id = singer.getId();
         String firstName = singer.getFirstName().toUpperCase();
         String lastName = singer.getLastName().toUpperCase();
         String song = singer.getSong().toUpperCase();
         Singer transformedSinger = new Singer();
+        transformedSinger.setId(id);
         transformedSinger.setFirstName(firstName);
         transformedSinger.setLastName(lastName);
         transformedSinger.setSong(song);

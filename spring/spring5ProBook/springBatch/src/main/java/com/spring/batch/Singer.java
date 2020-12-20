@@ -1,9 +1,18 @@
-package com.spting.batch;
+package com.spring.batch;
 
 public class Singer {
+    private Integer id;
     private String firstName;
     private String lastName;
     private String song;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -32,7 +41,8 @@ public class Singer {
     @Override
     public String toString() {
         return "Singer{" +
-                "firstName='" + firstName + '\'' +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", song='" + song + '\'' +
                 '}';
