@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>springBatch</module>
+        <module>springIntegration</module>
     </modules>
 
     <properties>
