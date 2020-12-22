@@ -68,8 +68,8 @@ public class BatchConfig {
     public ItemReader itemReader() {
         FlatFileItemReader itemReader = new FlatFileItemReader();
         itemReader.setResource(resourceLoader.getResource("classpath:support/test-data.csv"));
-        DefaultLineMapper lineMapper = new DefaultLineMapper();
 
+        DefaultLineMapper lineMapper = new DefaultLineMapper();
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
         tokenizer.setNames("id", "firstName", "lastName", "song");
         tokenizer.setDelimiter(",");
