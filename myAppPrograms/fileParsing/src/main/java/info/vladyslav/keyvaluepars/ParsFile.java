@@ -1,12 +1,13 @@
 package info.vladyslav.keyvaluepars;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import static info.vladyslav.util.GetScannerFromFile.getScannerFromFile;
 
 public class ParsFile {
     public static final String FILE_NAME_FOR_READ = "C:/Users/Владислав/Desktop/english.txt";
@@ -50,9 +51,8 @@ public class ParsFile {
         String lineForParse;
         String[] tokens;
 
-
         try {
-            Scanner scanner = new Scanner(new File(fileName), "UTF-8"); // cp1251, UTF-8
+            Scanner scanner = getScannerFromFile(fileName);
             while (scanner.hasNextLine()) {
                 lineForParse = scanner.nextLine();
 
