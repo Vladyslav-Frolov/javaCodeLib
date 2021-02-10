@@ -58,8 +58,16 @@ public class ParsFile {
 
                 if (lineForParse.contains(" — ")) {
                     tokens = lineForParse.split(" \\u2014 "); // " — "
-                }else{
-                    tokens = lineForParse.split(" \\u2192 "); // " ? "
+                } else if (lineForParse.contains(" - ")) {
+                    tokens = lineForParse.split(" - "); // " - "
+                } else if (lineForParse.contains("— ")) {
+                    tokens = lineForParse.split("\\u2002\\u2014 "); // " — "
+                } else if (lineForParse.contains(" —")) {
+                    tokens = lineForParse.split(" \\u2014\\u2002"); // " — "
+                } else if (lineForParse.contains("—")) {
+                    tokens = lineForParse.split("\\u2002\\u2014\\u2002"); // " — "
+                } else {
+                    tokens = lineForParse.split(" \\u2192 "); // " right arrow "
                 }
                 mapForSave.put(tokens[0].toLowerCase(), tokens[1].toLowerCase());
             }
