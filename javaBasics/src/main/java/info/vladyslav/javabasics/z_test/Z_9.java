@@ -6,7 +6,8 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class Z_9 {
-
+int i = 10;
+Integer ii =1000000000;
 
     public static void main(String[] args) {
         Instant instant = Clock.systemDefaultZone().instant();

@@ -12,6 +12,12 @@ or <a href="/springAlishev_war_exploded/exit">Exit</a>
 or <a href="/springAlishev_war_exploded/first/hello?name=Vlad&surname=Frolov">
     Request with parameters</a>
 
+<form id="hello" action="/springAlishev_war_exploded/first/hello" method="post">
+    <input type="hidden" name="name" value="Vlad"/>
+    <input type="hidden" name="surname" value="Frolov"/>
+    <input type="submit"/>
+</form>
+
 <p th:text="${message}"/>
 </body>
 </html>

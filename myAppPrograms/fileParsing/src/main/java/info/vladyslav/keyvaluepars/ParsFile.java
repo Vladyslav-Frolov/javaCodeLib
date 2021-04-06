@@ -49,7 +49,7 @@ public class ParsFile {
 
     public static Map<String, String> getInput(String fileName) {
         String lineForParse;
-        String[] tokens;
+        String[] tokens = new String[0];
 
         try {
             Scanner scanner = getScannerFromFile(fileName);
@@ -58,20 +58,27 @@ public class ParsFile {
 
                 if (lineForParse.contains(" — ")) {
                     tokens = lineForParse.split(" \\u2014 "); // " — "
-                } else if (lineForParse.contains(" - ")) {
+                } else if (lineForParse.contains(" – ")) {
+                    tokens = lineForParse.split(" – "); // " – "
+                }  else if (lineForParse.contains(" - ")) {
                     tokens = lineForParse.split(" - "); // " - "
                 } else if (lineForParse.contains("— ")) {
                     tokens = lineForParse.split("\\u2002\\u2014 "); // " — "
                 } else if (lineForParse.contains(" —")) {
                     tokens = lineForParse.split(" \\u2014\\u2002"); // " — "
+                } else if (lineForParse.contains(" –")) {
+                    tokens = lineForParse.split(" –"); // " — "
                 } else if (lineForParse.contains("—")) {
                     tokens = lineForParse.split("\\u2002\\u2014\\u2002"); // " — "
-                } else {
+                } else if (lineForParse.contains("\\u2192")) {
                     tokens = lineForParse.split(" \\u2192 "); // " right arrow "
+                } else {
+                    System.out.println(lineForParse); // convert to logging
                 }
                 mapForSave.put(tokens[0].toLowerCase(), tokens[1].toLowerCase());
             }
             scanner.close();
+            System.out.println("all done"); // convert to logging
             return mapForSave;
         } catch (IOException ex) {
             ex.printStackTrace();
