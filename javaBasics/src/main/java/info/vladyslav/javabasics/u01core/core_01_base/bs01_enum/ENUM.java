@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_01_base.bs01enum;
+package info.vladyslav.javabasics.u01core.core_01_base.bs01_enum;
 
 import java.util.Arrays;
 

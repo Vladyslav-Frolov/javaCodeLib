@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_01_base.bs05logger;
+package info.vladyslav.javabasics.u01core.core_01_base.bs05_logger;
 
 
 import java.util.logging.Level;

@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_01_base.bs02date;
+package info.vladyslav.javabasics.u01core.core_01_base.bs02_date;
 
 import java.util.Date;
 
