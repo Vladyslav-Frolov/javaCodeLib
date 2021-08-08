@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>psringAlishev</artifactId>
+    <artifactId>springAlishev</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>

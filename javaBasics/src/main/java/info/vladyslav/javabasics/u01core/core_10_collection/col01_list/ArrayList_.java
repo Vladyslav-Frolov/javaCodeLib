@@ -3,7 +3,7 @@ package info.vladyslav.javabasics.u01core.core_10_collection.col01_list;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListColl {
+public class ArrayList_ {
     public static void main(String[] args) {
         List<Object> listItems = new ArrayList<>();
         int num = 0;
