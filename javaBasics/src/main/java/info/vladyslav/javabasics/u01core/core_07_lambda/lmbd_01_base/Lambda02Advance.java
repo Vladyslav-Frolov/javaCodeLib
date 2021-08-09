@@ -1,19 +1,19 @@
 package info.vladyslav.javabasics.u01core.core_07_lambda.lmbd_01_base;
 
-public class Lambda02Advanse {
+public class Lambda02Advance {
     public static void main(String[] args) {
-        MyAdvansedNumber number = () -> 115.5;
+        MyAdvancedNumber number = () -> 115.5;
 
-        System.out.println("Functional method: " + number.getNamber());
+        System.out.println("Functional method: " + number.getNumber());
         number.doSomethingByDefault();
-        MyAdvansedNumber.doSomethingByStatic();
+        MyAdvancedNumber.doSomethingByStatic();
     }
 }
 
 @FunctionalInterface
-interface MyAdvansedNumber {
+interface MyAdvancedNumber {
 
-    double getNamber(); // функциональный метод, должен быть один на интерфейс
+    double getNumber(); // функциональный метод, должен быть один на интерфейс
 
     default void doSomethingByDefault() { // дефолтный метод
         System.out.println("Default method in functional interface");

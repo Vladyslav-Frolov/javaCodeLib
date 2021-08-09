@@ -1,10 +1,12 @@
 package info.vladyslav.javabasics.u01core.core_08_stream;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class Stream01Test {
     public static void main(String[] args) {
-        ArrayList<Integer> collection = new ArrayList<Integer>();
+        List<Integer> collection = new ArrayList<Integer>();
         collection.add(1);
         collection.add(2);
         collection.add(3);
@@ -12,8 +14,8 @@ public class Stream01Test {
         collection.add(5);
 
         Integer sumOddOld = 0;
-        for(Integer i: collection) {
-            if(i % 2 != 0) {
+        for (Integer i : collection) {
+            if (i % 2 != 0) {
                 sumOddOld += i;
             }
         }
@@ -22,8 +24,11 @@ public class Stream01Test {
         Integer sumOdd = collection
                 .parallelStream()
                 .filter(o -> o % 2 != 0)
-                .reduce((s1, s2) -> s1 + s2)
+//                .forEach(System.out::println);
+                .reduce(Integer::sum)
                 .orElse(0);
         System.out.println(sumOdd); // 9
+
+        Stream.builder().add("a1").add("a2").add("a3").build();
     }
 }

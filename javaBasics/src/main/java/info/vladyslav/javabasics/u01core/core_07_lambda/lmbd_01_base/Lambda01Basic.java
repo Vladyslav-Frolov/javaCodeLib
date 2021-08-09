@@ -7,6 +7,7 @@ public class Lambda01Basic {
 
         /** лямбда с вынесенным телом выражения*/
         MyNumber myNumber2 = () -> {            // остаётся только () ->
+            System.out.print("промежуточное вычисление --> ");
             return 123.45;                      // остаётся только 123.45
         };
 
@@ -18,13 +19,22 @@ public class Lambda01Basic {
             }
         };
 //---------------------------------------------------------------------
-        System.out.println(myNumber.getValue());
-        System.out.println(myNumber2.getValue());
-        System.out.println(myNumber3.getValue());
+        System.out.println(myNumber.getValue()); // 123.45
+        System.out.println(myNumber2.getValue()); // промежуточное вычисление --> 123.45
+        System.out.println(myNumber3.getValue());  // 123.45
     }
 }
 
-@FunctionalInterface
+@FunctionalInterface // только один абстрактный метод
 interface MyNumber {
-    double getValue();  // тип возвращаемого значения задан изначально
+
+    double getValue();  // тип возвращаемого значения задан изначально // только один абстрактный метод
+
+    static double getStaticValue() { // разрешается статический метод
+        return 50.;
+    }
+
+    default double getDefaultValue(){ // разрешается метод по умолчанию
+        return 100.;
+    }
 }

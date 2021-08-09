@@ -15,13 +15,11 @@ public class HashSet_ {
     {
         hashSet.remove("2");
     }
-    //----------------------------------
-
 
     //----------------------------------
     public static void main(String[] args) {
         HashSet_ hashSet = new HashSet_();
-        System.out.println(hashSet.hashSet);
+        System.out.println(hashSet.hashSet); // [1, 3, 4]
         System.out.println(hashSet.hashSet.size()); // 3
         System.out.println(hashSet.hashSet.isEmpty()); // false
         System.out.println(hashSet.hashSet.contains("1")); // true

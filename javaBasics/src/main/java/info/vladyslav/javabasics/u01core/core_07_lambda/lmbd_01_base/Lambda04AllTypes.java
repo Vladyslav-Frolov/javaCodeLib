@@ -8,7 +8,7 @@ public class Lambda04AllTypes {
         };
         consumer.accept(10.);*/
 
-        res(10, (x) -> System.out.println(x));
+        res(10, System.out::println);
 
     }
 
