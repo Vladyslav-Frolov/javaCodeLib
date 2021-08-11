@@ -24,6 +24,7 @@ public class HashSet_ {
         System.out.println(hashSet.hashSet.isEmpty()); // false
         System.out.println(hashSet.hashSet.contains("1")); // true
         System.out.println(hashSet.hashSet.contains("2")); // false
+        System.out.println(hashSet.hashSet);  // [1, 3, 4]
     }
 
 
