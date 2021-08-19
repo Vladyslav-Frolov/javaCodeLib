@@ -18,4 +18,8 @@ public class EqualsAndHashCode {
     public int hashCode() {
         return Objects.hash(i, s);
     }
+
+    {
+        Object o;
+    }
 }
