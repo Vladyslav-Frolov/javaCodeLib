@@ -1,5 +1,8 @@
 package info.vladyslav.javabasics.u01core.core_08_stream;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -38,31 +41,16 @@ Streams streams = new Streams();
     }
 
 
-
+    @AllArgsConstructor
+    @Data
     private class Department{
         Integer id;
         Integer parent;
         String name;
 
-        public Department(Integer id, Integer parent, String name) {
-            this.id = id;
-            this.parent = parent;
-            this.name = name;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public Integer getParent() {
-            return parent;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
-
+    @AllArgsConstructor
+    @Data
     private class Employee {
         String firstName;
         String lastName;
@@ -70,13 +58,6 @@ Streams streams = new Streams();
         Integer age;
         Position position;
 
-        public Employee(String firstName, String lastName, Integer id, Integer age, Position position) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.id = id;
-            this.age = age;
-            this.position = position;
-        }
     }
 
     enum Position {
