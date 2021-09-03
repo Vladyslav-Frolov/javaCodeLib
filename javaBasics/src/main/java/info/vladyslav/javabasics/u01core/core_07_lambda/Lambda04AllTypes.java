@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_07_lambda.lmbd_01_base;
+package info.vladyslav.javabasics.u01core.core_07_lambda;
 
 public class Lambda04AllTypes {
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class Lambda04AllTypes {
 
     }
 
-    static void res(int i, Consumer c) {
+    static void res(int i, Consumer<Integer> c) {
         c.accept(i);
     }
 
