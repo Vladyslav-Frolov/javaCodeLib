@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_01_base.bs13_cycles;
+package info.vladyslav.javabasics.u01core.core_01_base.bs13_cyclesAndLoops;
 
 import java.util.Scanner;
 
