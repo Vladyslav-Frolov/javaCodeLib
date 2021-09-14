@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.z_test;
+package info.vladyslav.javabasics.z_test.old;
 
 public class TestWithoutSaveOfCode {
 

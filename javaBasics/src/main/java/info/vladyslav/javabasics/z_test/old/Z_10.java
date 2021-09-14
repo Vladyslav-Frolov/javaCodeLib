@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.z_test;
+package info.vladyslav.javabasics.z_test.old;
 
 public class Z_10 {
     Integer zip = 1000000000;
