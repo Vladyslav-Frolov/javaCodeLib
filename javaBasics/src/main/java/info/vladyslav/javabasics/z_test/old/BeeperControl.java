@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.z_test;
+package info.vladyslav.javabasics.z_test.old;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

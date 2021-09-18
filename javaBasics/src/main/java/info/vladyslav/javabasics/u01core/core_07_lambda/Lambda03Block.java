@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_07_lambda.lmbd_01_base;
+package info.vladyslav.javabasics.u01core.core_07_lambda;
 
 public class Lambda03Block {
     public static void main(String[] args) {

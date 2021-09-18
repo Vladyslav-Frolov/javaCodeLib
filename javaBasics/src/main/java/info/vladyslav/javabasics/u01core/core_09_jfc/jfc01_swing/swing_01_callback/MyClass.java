@@ -1,4 +1,4 @@
-package info.vladyslav.javabasics.u01core.core_09_jfc.jfc_01_swing.swing_01_callback;
+package info.vladyslav.javabasics.u01core.core_09_jfc.jfc01_swing.swing_01_callback;
 
 public class MyClass implements SomeClass.Callback {
     @Override
