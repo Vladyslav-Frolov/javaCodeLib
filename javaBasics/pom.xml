@@ -2,26 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>info.vladyslav.javaCodeLib.JavaBasics</groupId>
     <artifactId>JavaBasics</artifactId>
-    <version>${version}</version>
+    <groupId>JavaBasics</groupId>
+    <name>JavaBasics</name>
+    <version>${version2}</version>
+    <packaging>jar</packaging>
 
     <properties>
-        <version>1.0-SNAPSHOT</version>
+        <version2>1.0-SNAPSHOT</version2>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+            <version>1.18.20</version>
         </dependency>
     </dependencies>
 
