@@ -3,10 +3,10 @@ package info.vladyslav.myhadoop;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class Car {
-    private String brand;
-    private int doors;
+public class InvalidRecords {
+    List<String> invalid_records;
 }
-

@@ -1,9 +1,10 @@
-package info.vladyslav.myhadoop;
+package info.vladyslav.mytests;
 
 
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import info.vladyslav.mytests.Car;
 
 public class JsonTest {
     public static void main(String[] args) {

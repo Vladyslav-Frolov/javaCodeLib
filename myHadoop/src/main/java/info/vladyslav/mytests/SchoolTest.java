@@ -1,16 +1,19 @@
-package info.vladyslav.myhadoop;
+package info.vladyslav.mytests;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import info.vladyslav.myhadoop.Student;
 import lombok.SneakyThrows;
 
 public class SchoolTest {
     @SneakyThrows
     public static void main(String[] args) {
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("C:\\Users\\vfrolo\\IdeaProjects\\javaCodeLib\\myHadoop\\students.json");
+        File file = new File("myHadoop/student.json");
         Student student = objectMapper.readValue(file, Student.class);
 
+        System.out.println(student);
     }
 }
