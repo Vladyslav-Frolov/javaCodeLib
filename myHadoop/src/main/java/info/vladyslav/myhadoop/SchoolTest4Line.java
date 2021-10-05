@@ -1,5 +1,6 @@
 package info.vladyslav.myhadoop;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SchoolTest4Line {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
@@ -36,13 +37,13 @@ public class SchoolTest4Line {
 
         while (line != null) {
             // заменяем нераспасиваемые кавычки на обычные
-            String newLine = line.replaceAll("“|”", "\"");
+            String newLine = line.replaceAll("[“”]", "\"");
 
             try {
                 // проверяем на наличие правильно заполненных полей
                 Student student = objectMapper.readValue(newLine, Student.class);
-                if (student.getCLass() < 1 | student.getCLass() > 12 |
-                        student.getMark() < 0 | student.getMark() > 5 |
+                if (student.getCLass() < 1 || student.getCLass() > 12 ||
+                        student.getMark() < 0 || student.getMark() > 5 ||
                         student.getName().equals("")) {
                     forInvalids.add(newLine);
                 } else {
@@ -63,7 +64,7 @@ public class SchoolTest4Line {
 //        students.forEach(System.out::println);
 
         // фильтруем студентов собирая 5-й и выше классы
-        students = students.stream().filter((f) -> f.getCLass() >= 5).collect(Collectors.toCollection(ArrayList::new));
+        students = students.stream().filter(f -> f.getCLass() >= 5).collect(Collectors.toCollection(ArrayList::new));
 
 
         // собираем студентов по оценкам // (!) код не эффективен, есть возможность улучить
@@ -85,9 +86,12 @@ public class SchoolTest4Line {
 //        System.out.println(groupByMarks);
 
         invalidRecords.setInvalid_records(forInvalids);
+
+        String json = objectMapper.writeValueAsString(groupByMarks);
+        System.out.println(json);
         try {
-            objectMapper.writeValue(
-                    new FileOutputStream("myHadoop/output-2.json"), invalidRecords);
+//            objectMapper.writeValue(
+//                    new FileOutputStream("myHadoop/output-2.json"), invalidRecords);
             objectMapper.writeValue(
                     new FileOutputStream("myHadoop/output-1.json"), groupByMarks);
         } catch (IOException e) {

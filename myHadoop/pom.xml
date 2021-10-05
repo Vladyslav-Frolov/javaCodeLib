@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>myHadoop</artifactId>
-    <version>3.2.1</version>
+    <version>${hadoop.version}</version>
     <build>
         <plugins>
             <plugin>
@@ -24,16 +24,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <jecson.version>2.12.5</jecson.version>
+        <hadoop.version>3.2.1</hadoop.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-
 <!--        <dependency>
             <groupId>org.apache.hadoop.examples</groupId>
             <artifactId>hadoop-mapreduce-examples</artifactId>
@@ -44,14 +38,34 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>3.2.1</version>
+            <version>${hadoop.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
-            <version>3.2.1</version>
+            <version>${hadoop.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs &ndash;&gt;
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>${hadoop.version}</version>
+            <scope>test</scope>
+        </dependency>-->
+
+        <!--        <dependency>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-mapreduce-client-shuffle</artifactId>
+                    <version>${hadoop.version}</version>
+                </dependency>-->
 
         <!--redundant if databind is exist-->
 <!--        <dependency>
@@ -76,18 +90,18 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+            <version>1.18.20</version>
+
         </dependency>
 
     </dependencies>
 
-    <repositories>
+<!--    <repositories>
         <repository>
             <id>localrep</id>
             <name>local repository</name>
             <url>file:${project.basedir}\lib</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
 </project>
