@@ -23,22 +23,28 @@ public class Job2_AddNameAndAddressOfSchool {
     public static class GroupByMarksMap extends MapReduceBase implements Mapper<Object, Text, Text, Text> {
         ObjectMapper objectMapper = new ObjectMapper();
         StudentsGroupByMark studentsGroupByMark = new StudentsGroupByMark();
-        Student student = new Student();
-        StudentWithSchool studentWithSchool = new StudentWithSchool();
+        ArrayList<StudentWithSchool> studentsWithSchool = new ArrayList<>();
+        StudentsWithSchool studentssWithSchool = new StudentsWithSchool();
 
         public void map(Object key, Text value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
             studentsGroupByMark = objectMapper.readValue(value.toString(), StudentsGroupByMark.class);
-            student = studentsGroupByMark.getStudents().get(0);
-            studentWithSchool.setName(student.getName());
-            studentWithSchool.setMark(student.getMark());
-            studentWithSchool.setCLass(student.getCLass());
-            studentWithSchool.setSchoolName("random school");
-            studentWithSchool.setSchoolAddress("random school address");
-            Text integer = new Text(Integer.toString(studentsGroupByMark.getMark()));
-            output.collect(integer, new Text(objectMapper.writeValueAsString(studentWithSchool)));
+            ArrayList<Student> students = studentsGroupByMark.getStudents();
+            int i = 0;
+            for (Student studentIter : students) {
+                StudentWithSchool studentWithSchool = new StudentWithSchool();
+                studentWithSchool.setName(studentIter.getName());
+                studentWithSchool.setMark(studentIter.getMark());
+                studentWithSchool.setCLass(studentIter.getCLass());
+                studentWithSchool.setSchoolName("random school");
+                studentWithSchool.setSchoolAddress("random school address");
+                studentsWithSchool.add(i, studentWithSchool);
+                i++;
+            }
+
+            studentssWithSchool.setStudentsWithSchool(studentsWithSchool);
+            output.collect(new Text("all"), new Text(objectMapper.writeValueAsString(studentssWithSchool)));
         }
     }
-
 
     public static class GroupByMarksReduce extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
         public void reduce(Text key, Iterator<Text> values, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
@@ -47,18 +53,21 @@ public class Job2_AddNameAndAddressOfSchool {
             ArrayList<StudentWithSchool> studentsWithSchoolMiddle = new ArrayList<>();
             ArrayList<StudentWithSchool> studentsWithSchoolWorst = new ArrayList<>();
             StudentsGroupByRate studentsGroupByRate = new StudentsGroupByRate();
-//            StudentWithSchool studentWithSchool = new StudentWithSchool();
             while (values.hasNext()) {
-                StudentWithSchool student = objectMapper.readValue(values.next().toString(), StudentWithSchool.class);
+                StudentsWithSchool student = objectMapper.readValue(values.next().toString(), StudentsWithSchool.class);
 
-                if (student.getMark() >= 4 && student.getMark() <= 5)
-                    studentsWithSchoolBest.add(student);
+                ArrayList<StudentWithSchool> studentsWithSchool = student.getStudentsWithSchool();
+                for (StudentWithSchool studentWithSchool : studentsWithSchool) {
+                    if (studentWithSchool.getMark() >= 4 && studentWithSchool.getMark() <= 5)
+                        studentsWithSchoolBest.add(studentWithSchool);
 
-                if (student.getMark() == 3)
-                    studentsWithSchoolMiddle.add(student);
+                    if (studentWithSchool.getMark() == 3)
+                        studentsWithSchoolMiddle.add(studentWithSchool);
 
-                if (student.getMark() >= 1 && student.getMark() <= 2)
-                    studentsWithSchoolWorst.add(student);
+                    if (studentWithSchool.getMark() >= 1 && studentWithSchool.getMark() <= 2)
+                        studentsWithSchoolWorst.add(studentWithSchool);
+                }
+
             }
             studentsGroupByRate.setBestStudents(studentsWithSchoolBest);
             studentsGroupByRate.setMiddleStudents(studentsWithSchoolMiddle);
@@ -78,7 +87,6 @@ public class Job2_AddNameAndAddressOfSchool {
         conf.setOutputValueClass(Text.class);
 
         conf.setMapperClass(Job2_AddNameAndAddressOfSchool.GroupByMarksMap.class);
-//        conf.setCombinerClass(Job1_2_GroupByMark.GroupByMarksReduce.class);
         conf.setReducerClass(Job2_AddNameAndAddressOfSchool.GroupByMarksReduce.class);
 
         conf.setInputFormat(TextInputFormat.class);
