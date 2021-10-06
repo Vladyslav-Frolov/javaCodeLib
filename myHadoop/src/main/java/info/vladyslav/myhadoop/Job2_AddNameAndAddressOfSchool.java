@@ -42,36 +42,47 @@ public class Job2_AddNameAndAddressOfSchool {
             }
 
             studentssWithSchool.setStudentsWithSchool(studentsWithSchool);
-            output.collect(new Text("all"), new Text(objectMapper.writeValueAsString(studentssWithSchool)));
+            Text performance = new Text();
+            if (studentsGroupByMark.getMark() >= 1 && studentsGroupByMark.getMark() <= 2) {
+                performance = new Text("worstStudents");
+            }
+
+            if (studentsGroupByMark.getMark() == 3) {
+                performance = new Text("middleStudents");
+            }
+
+            if (studentsGroupByMark.getMark() >= 4 && studentsGroupByMark.getMark() <= 5) {
+                performance = new Text("bestStudents");
+            }
+
+            output.collect(performance, new Text(objectMapper.writeValueAsString(studentssWithSchool)));
         }
     }
 
     public static class GroupByMarksReduce extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
         public void reduce(Text key, Iterator<Text> values, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
             ObjectMapper objectMapper = new ObjectMapper();
-            ArrayList<StudentWithSchool> studentsWithSchoolBest = new ArrayList<>();
-            ArrayList<StudentWithSchool> studentsWithSchoolMiddle = new ArrayList<>();
-            ArrayList<StudentWithSchool> studentsWithSchoolWorst = new ArrayList<>();
+            ArrayList<StudentWithSchool> studentsWithSchool = new ArrayList<>();
             StudentsGroupByRate studentsGroupByRate = new StudentsGroupByRate();
             while (values.hasNext()) {
-                StudentsWithSchool student = objectMapper.readValue(values.next().toString(), StudentsWithSchool.class);
+                StudentsWithSchool students = objectMapper.readValue(values.next().toString(), StudentsWithSchool.class);
 
-                ArrayList<StudentWithSchool> studentsWithSchool = student.getStudentsWithSchool();
-                for (StudentWithSchool studentWithSchool : studentsWithSchool) {
+                ArrayList<StudentWithSchool> studentssWithSchool = students.getStudentsWithSchool();
+                for (StudentWithSchool studentWithSchool : studentssWithSchool) {
                     if (studentWithSchool.getMark() >= 4 && studentWithSchool.getMark() <= 5)
-                        studentsWithSchoolBest.add(studentWithSchool);
+                        studentsWithSchool.add(studentWithSchool);
 
                     if (studentWithSchool.getMark() == 3)
-                        studentsWithSchoolMiddle.add(studentWithSchool);
+                        studentsWithSchool.add(studentWithSchool);
 
                     if (studentWithSchool.getMark() >= 1 && studentWithSchool.getMark() <= 2)
-                        studentsWithSchoolWorst.add(studentWithSchool);
+                        studentsWithSchool.add(studentWithSchool);
                 }
 
             }
-            studentsGroupByRate.setBestStudents(studentsWithSchoolBest);
-            studentsGroupByRate.setMiddleStudents(studentsWithSchoolMiddle);
-            studentsGroupByRate.setWorstStudents(studentsWithSchoolWorst);
+            studentsGroupByRate.setStudents(studentsWithSchool);
+            studentsGroupByRate.setPerformance(key.toString());
+
 
 
             output.collect(new Text(objectMapper.writeValueAsString(studentsGroupByRate)), new Text());

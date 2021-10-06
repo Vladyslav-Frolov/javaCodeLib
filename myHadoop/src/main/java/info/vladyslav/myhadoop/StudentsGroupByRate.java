@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 @Data
 public class StudentsGroupByRate {
-    ArrayList<StudentWithSchool> bestStudents;
-    ArrayList<StudentWithSchool> middleStudents;
-    ArrayList<StudentWithSchool> worstStudents;
+    String performance;
+    ArrayList<StudentWithSchool> students;
 }
