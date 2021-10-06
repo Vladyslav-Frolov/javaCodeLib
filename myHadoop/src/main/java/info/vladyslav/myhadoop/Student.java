@@ -1,16 +1,9 @@
 package info.vladyslav.myhadoop;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.function.IntFunction;
-
-@Getter
-@Setter
-@ToString
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Student {
     String name;
