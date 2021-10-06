@@ -7,5 +7,5 @@ import java.util.ArrayList;
 @Data
 public class StudentsWithSchoolEncr {
     String performance;
-    ArrayList<StudentWithSchoolEncr> studentsWithSchoolEncr;
+    ArrayList<StudentWithSchoolEncr> studentsWithSchoolEncr = new ArrayList<>();
 }

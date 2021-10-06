@@ -34,49 +34,6 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
     public static final String INVALID = "INVALID";
     public static final String GOAL = "GOAL";
 
-/*    public static class JsonOutputFormat extends TextOutputFormat<Text, IntWritable> {
-        @Override
-        public RecordWriter<Text, IntWritable> getRecordWriter(
-                TaskAttemptContext context) throws IOException,
-                InterruptedException {
-            Configuration conf = context.getConfiguration();
-            Path path = getOutputPath(context);
-            FileSystem fs = path.getFileSystem(conf);
-            FSDataOutputStream out =
-                    fs.create(new Path(path, context.getJobName()));
-            return new JsonRecordWriter(out);
-        }
-
-        private static class JsonRecordWriter extends
-                LineRecordWriter<Text, IntWritable> {
-            boolean firstRecord = true;
-
-            @Override
-            public synchronized void close(TaskAttemptContext context)
-                    throws IOException {
-                out.writeChar('{');
-                super.close(null);
-            }
-
-            @Override
-            public synchronized void write(Text key, IntWritable value)
-                    throws IOException {
-                if (!firstRecord) {
-                    out.writeChars(",\r\n");
-                    firstRecord = false;
-                }
-                out.writeChars("\"" + key.toString() + "\":\"" +
-                        value.toString() + "\"");
-            }
-
-            public JsonRecordWriter(DataOutputStream out)
-                    throws IOException {
-                super(out);
-                out.writeChar('}');
-            }
-        }
-    }*/
-
     public static class StudentsMapper extends Mapper<Object, Text, Text, Text> {
 
         MultipleOutputs<?, ?> multipleOutputs;
@@ -103,16 +60,11 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
                     multipleOutputs.write(INVALID, NullWritable.get(), new Text(preparedLine), "INVALID/INVALID");
                 } else {
                     // если всё правильно --> пишем в этот файл
-
-//                    multipleOutputs.write(GOAL, NullWritable.get(), preparedLine, "GOAL/GOAL");
-//                    context.write(new Text(preparedLine), new Text());
-
                     StudentsGroupByMark studentsGroupByMark = new StudentsGroupByMark();
                     for (int i = 1; i <= 5; i++) {
                         if (getStudent.getMark() == i) {
                             studentsGroupByMark.setMark(i);
                             studentsGroupByMark.setStudents(new ArrayList<>(Collections.singletonList(getStudent)));
-
 //                            context.write(new Text(objectMapper.writeValueAsString(studentsGroupByMark)), null);
                             multipleOutputs.write(GOAL, new Text(objectMapper.writeValueAsString(studentsGroupByMark)), NullWritable.get(), "GOAL/GOAL");
                         }
@@ -157,7 +109,7 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
         }
     }*/
 
-    public static class GroupByMarksMap extends MapReduceBase implements org.apache.hadoop.mapred.Mapper<LongWritable, Text, Text, IntWritable> {
+/*    public static class GroupByMarksMap extends MapReduceBase implements org.apache.hadoop.mapred.Mapper<LongWritable, Text, Text, IntWritable> {
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
 
@@ -179,7 +131,7 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
             }
             output.collect(key, new IntWritable(sum));
         }
-    }
+    }*/
 
 
 
