@@ -6,7 +6,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.vladyslav.mytests.Car;
 
-public class JsonTest {
+public class JsonObjectMapperTest {
     public static void main(String[] args) {
         ObjectMapper objectMapper = new ObjectMapper();
 

@@ -17,7 +17,7 @@ public class SchoolTest4Line {
         ArrayList<Student> students = new ArrayList<>();
         InvalidRecords invalidRecords = new InvalidRecords();
         ArrayList<String> forInvalids = new ArrayList<>();
-        ArrayList<GroupByMark> groupByMarks = new ArrayList<>();
+        ArrayList<StudentsGroupByMark> studentsGroupByMarks = new ArrayList<>();
 
         File file = new File("myHadoop/students.json");
 
@@ -69,14 +69,14 @@ public class SchoolTest4Line {
 
         // собираем студентов по оценкам // (!) код не эффективен, есть возможность улучить
         for (int i = 1; i <= 5; i++) {
-            GroupByMark groupByMark = new GroupByMark(i);
+            StudentsGroupByMark studentsGroupByMark = new StudentsGroupByMark(i);
 
             for (Student student : students) {
                 if(student.getMark() == i){
-                    groupByMark.getStudents().add(student);
+                    studentsGroupByMark.getStudents().add(student);
                 }
             }
-            groupByMarks.add(groupByMark);
+            studentsGroupByMarks.add(studentsGroupByMark);
         }
 
 
@@ -87,13 +87,13 @@ public class SchoolTest4Line {
 
         invalidRecords.setInvalid_records(forInvalids);
 
-        String json = objectMapper.writeValueAsString(groupByMarks);
+        String json = objectMapper.writeValueAsString(studentsGroupByMarks);
         System.out.println(json);
         try {
 //            objectMapper.writeValue(
 //                    new FileOutputStream("myHadoop/output-2.json"), invalidRecords);
             objectMapper.writeValue(
-                    new FileOutputStream("myHadoop/output-1.json"), groupByMarks);
+                    new FileOutputStream("myHadoop/output-1.json"), studentsGroupByMarks);
         } catch (IOException e) {
             e.printStackTrace();
         }
