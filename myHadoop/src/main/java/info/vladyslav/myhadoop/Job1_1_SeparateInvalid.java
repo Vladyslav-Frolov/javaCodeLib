@@ -2,11 +2,8 @@ package info.vladyslav.myhadoop;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.minidev.json.JSONObject;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
-import org.apache.hadoop.fs.FSDataOutputStream;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -18,8 +15,6 @@ import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.RecordWriter;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -29,15 +24,13 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
-public class Job1_SeparateInvalid extends Configured implements Tool {
+public class Job1_1_SeparateInvalid extends Configured implements Tool {
     public static final String INVALID = "INVALID";
     public static final String GOAL = "GOAL";
 
@@ -192,7 +185,7 @@ public class Job1_SeparateInvalid extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
         int exitCode = ToolRunner.run(new Configuration(),
-                new Job1_SeparateInvalid(), args);
+                new Job1_1_SeparateInvalid(), args);
         System.exit(exitCode);
     }
 
@@ -212,7 +205,7 @@ public class Job1_SeparateInvalid extends Configured implements Tool {
         job.setInputFormatClass(KeyValueTextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        job.setJarByClass(Job1_SeparateInvalid.class);
+        job.setJarByClass(Job1_1_SeparateInvalid.class);
         job.setMapperClass(StudentsMapper.class);
 //        job.setReducerClass(MarkReducer.class);
 

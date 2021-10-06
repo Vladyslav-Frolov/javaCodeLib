@@ -29,7 +29,6 @@ public class Job2_AddNameAndAddressOfSchool {
         public void map(Object key, Text value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
             studentsGroupByMark = objectMapper.readValue(value.toString(), StudentsGroupByMark.class);
             ArrayList<Student> students = studentsGroupByMark.getStudents();
-            int i = 0;
             for (Student studentIter : students) {
                 StudentWithSchool studentWithSchool = new StudentWithSchool();
                 studentWithSchool.setName(studentIter.getName());
@@ -37,25 +36,21 @@ public class Job2_AddNameAndAddressOfSchool {
                 studentWithSchool.setCLass(studentIter.getCLass());
                 studentWithSchool.setSchoolName("random school");
                 studentWithSchool.setSchoolAddress("random school address");
-                studentsWithSchool.add(i, studentWithSchool);
-                i++;
+                studentsWithSchool.add(studentWithSchool);
             }
 
             studentssWithSchool.setStudentsWithSchool(studentsWithSchool);
             Text performance = new Text();
             if (studentsGroupByMark.getMark() >= 1 && studentsGroupByMark.getMark() <= 2) {
                 performance = new Text("worstStudents");
-            }
-
-            if (studentsGroupByMark.getMark() == 3) {
+            } else if (studentsGroupByMark.getMark() == 3) {
                 performance = new Text("middleStudents");
-            }
-
-            if (studentsGroupByMark.getMark() >= 4 && studentsGroupByMark.getMark() <= 5) {
+            } else if (studentsGroupByMark.getMark() >= 4 && studentsGroupByMark.getMark() <= 5) {
                 performance = new Text("bestStudents");
             }
 
             output.collect(performance, new Text(objectMapper.writeValueAsString(studentssWithSchool)));
+            studentsWithSchool.clear();
         }
     }
 
@@ -69,20 +64,18 @@ public class Job2_AddNameAndAddressOfSchool {
 
                 ArrayList<StudentWithSchool> studentssWithSchool = students.getStudentsWithSchool();
                 for (StudentWithSchool studentWithSchool : studentssWithSchool) {
-                    if (studentWithSchool.getMark() >= 4 && studentWithSchool.getMark() <= 5)
+                    if (studentWithSchool.getMark() >= 4 && studentWithSchool.getMark() <= 5) {
                         studentsWithSchool.add(studentWithSchool);
-
-                    if (studentWithSchool.getMark() == 3)
+                    } else if (studentWithSchool.getMark() == 3) {
                         studentsWithSchool.add(studentWithSchool);
-
-                    if (studentWithSchool.getMark() >= 1 && studentWithSchool.getMark() <= 2)
+                    } else if (studentWithSchool.getMark() >= 1 && studentWithSchool.getMark() <= 2) {
                         studentsWithSchool.add(studentWithSchool);
+                    }
                 }
 
             }
             studentsGroupByRate.setStudents(studentsWithSchool);
             studentsGroupByRate.setPerformance(key.toString());
-
 
 
             output.collect(new Text(objectMapper.writeValueAsString(studentsGroupByRate)), new Text());
