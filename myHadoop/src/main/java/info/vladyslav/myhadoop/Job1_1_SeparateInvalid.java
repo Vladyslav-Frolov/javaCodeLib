@@ -5,14 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.MapReduceBase;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reducer;
-import org.apache.hadoop.mapred.Reporter;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -27,8 +21,6 @@ import org.apache.hadoop.util.ToolRunner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.StringTokenizer;
 
 public class Job1_1_SeparateInvalid extends Configured implements Tool {
     public static final String INVALID = "INVALID";
@@ -48,7 +40,7 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
         ) throws IOException, InterruptedException {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
-
+                //TODO!
             String preparedLine = key.toString().replaceAll("[“”]", "\"");
             try {
                 // проверяем на наличие правильно заполненных полей
@@ -64,8 +56,10 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
                     for (int i = 1; i <= 5; i++) {
                         if (getStudent.getMark() == i) {
                             studentsGroupByMark.setMark(i);
+                            // TODO
                             studentsGroupByMark.setStudents(new ArrayList<>(Collections.singletonList(getStudent)));
 //                            context.write(new Text(objectMapper.writeValueAsString(studentsGroupByMark)), null);
+                            // TODO!
                             multipleOutputs.write(GOAL, new Text(objectMapper.writeValueAsString(studentsGroupByMark)), NullWritable.get(), "GOAL/GOAL");
                         }
                     }
@@ -132,7 +126,6 @@ public class Job1_1_SeparateInvalid extends Configured implements Tool {
             output.collect(key, new IntWritable(sum));
         }
     }*/
-
 
 
     public static void main(String[] args) throws Exception {

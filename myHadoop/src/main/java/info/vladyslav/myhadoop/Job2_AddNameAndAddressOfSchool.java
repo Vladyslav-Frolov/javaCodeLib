@@ -22,11 +22,13 @@ import java.util.Iterator;
 public class Job2_AddNameAndAddressOfSchool {
     public static class GroupByMarksMap extends MapReduceBase implements Mapper<Object, Text, Text, Text> {
         ObjectMapper objectMapper = new ObjectMapper();
-        StudentsGroupByMark studentsGroupByMark = new StudentsGroupByMark();
-        ArrayList<StudentWithSchool> studentsWithSchool = new ArrayList<>();
-        StudentsWithSchool studentssWithSchool = new StudentsWithSchool();
+
 
         public void map(Object key, Text value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
+            StudentsGroupByMark studentsGroupByMark = new StudentsGroupByMark();
+            ArrayList<StudentWithSchool> studentsWithSchool = new ArrayList<>();
+            StudentsWithSchool studentssWithSchool = new StudentsWithSchool();
+
             studentsGroupByMark = objectMapper.readValue(value.toString(), StudentsGroupByMark.class);
             ArrayList<Student> students = studentsGroupByMark.getStudents();
             for (Student studentIter : students) {
@@ -34,6 +36,7 @@ public class Job2_AddNameAndAddressOfSchool {
                 studentWithSchool.setName(studentIter.getName());
                 studentWithSchool.setMark(studentIter.getMark());
                 studentWithSchool.setCLass(studentIter.getCLass());
+                // TODO muliple inmput dataset for school
                 studentWithSchool.setSchoolName("random school");
                 studentWithSchool.setSchoolAddress("random school address");
                 studentsWithSchool.add(studentWithSchool);
