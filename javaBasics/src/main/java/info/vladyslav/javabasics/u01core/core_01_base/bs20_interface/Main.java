@@ -15,9 +15,9 @@ public interface Main {
         return (T * E) * 2;
     }
 
-    private double multiply3(double T, double E) {
+/*    private double multiply3(double T, double E) {
         return (T * E) * 2;
-    }
+    }*/
 
     class TestPrivateInterfaceClass {
         public static void main(String[] args) {
@@ -30,7 +30,7 @@ public interface Main {
                     return 0;
                 }
             };
-            System.out.println(main.multiply3(3., 2.));
+//            System.out.println(main.multiply3(3., 2.));
         }
     }
 }

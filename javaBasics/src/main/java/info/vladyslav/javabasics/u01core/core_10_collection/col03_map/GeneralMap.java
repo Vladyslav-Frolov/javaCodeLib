@@ -20,5 +20,6 @@ public class GeneralMap {
         System.out.println(hashMap.containsKey("1")); // true
         System.out.println(hashMap.containsKey(1)); // false
         System.out.println(hashMap.containsValue(1)); // true
+
     }
 }
