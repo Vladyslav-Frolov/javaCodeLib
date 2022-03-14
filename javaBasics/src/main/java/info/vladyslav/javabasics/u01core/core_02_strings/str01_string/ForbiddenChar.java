@@ -1,26 +1,35 @@
 package info.vladyslav.javabasics.u01core.core_02_strings.str01_string;
 
-import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
-public class SurrogateChar {
+public class ForbiddenChar {
+
+
     public static void main(String[] args) {
 /*        int[] surrogates = {0xD83D, 0xDC7D};
         String alienEmojiString = new String(surrogates, 0, surrogates.length);
         System.out.println(alienEmojiString);
         System.out.println("\uD83D\uDC7D");   // alternative way
         System.out.println("\uD83D\uDE44");   // alternative way*/
-
         Character cc = (char) 0x4;
         int i = cc;
         System.out.println(cc + "" + i + " " + 0x1F600);
         System.out.println("-->" + cc + "<--");
 
-        String temp = "megash.cox\u0004aol.com";
+        System.out.println("=====================");
+        String temp = "{\"userEmailAddress\":\"meg\\u0009ash.cox\\u0004aol.com\\udsfa\"}";
+//        String temp = "1";
+        String temp2 = "don't allow chars --> \u0000, \uFFFE, \uFFFF";
 
+
+        System.out.println(temp);
         temp = stripInvalidXmlCharacters(temp);
-
         System.out.println("-->" + temp + "<--");
+
+        System.out.println();
+        System.out.println(temp2);
+        temp2 = stripInvalidXmlCharacters(temp2);
+        System.out.println("-->" + temp2 + "<--");
 
     }
 
@@ -29,22 +38,49 @@ public class SurrogateChar {
     // for standard XML 1.0 (Fifth Edition) https://www.w3.org/TR/xml/#charsets
     private static String stripInvalidXmlCharacters(String in) {
         char current; // Used to reference the current character.
+        StringBuilder out = new StringBuilder();
 
         if (StringUtils.isEmpty(in)) {
             return ""; // vacancy test.
         }
 
+        char fetchedChar = 0;
+        StringBuilder chaar = new StringBuilder();
+
         for (int i = 0; i < in.length(); i++) {
             current = in.charAt(i);
-            // Don't allow the following:
-            if ((current <= 0x8) ||
-                    ((current >= 0xB) && (current <= 0xC)) ||
-                    ((current >= 0xE) && (current <= 0x1F)) ||
-                    (current >= 0xfffe)) {
-                return deleteInvalidCharForXml(in);
+
+            // test for escape sequence
+            if (current == '\\' && in.charAt(i + 1) == 'u') {
+                chaar.append(in.charAt(i + 2));
+                chaar.append(in.charAt(i + 3));
+                chaar.append(in.charAt(i + 4));
+                chaar.append(in.charAt(i + 5));
+                try {
+                    fetchedChar = (char) Integer.parseInt(String.valueOf(chaar), 16);
+                } catch (NumberFormatException ignored) {
+                    out.append(current);
+                }
+
+                if (!isAllowedChars(fetchedChar)) {
+                    i += 5;
+                    continue;
+                }
             }
+            if (!isAllowedChars(current)) {
+                continue;
+            }
+            out.append(current);
         }
-        return in;
+        return out.toString();
+    }
+
+    private static boolean isAllowedChars(char current) {
+        // Don't allow the following:
+        return (current > 0x0008) &&
+                ((current < 0x000B) || (current > 0x000C)) &&
+                ((current < 0x000E) || (current > 0x001F)) &&
+                (current < 0xfffe);
     }
 
     // for standard XML 1.0 (Fifth Edition) https://www.w3.org/TR/xml/#charsets
