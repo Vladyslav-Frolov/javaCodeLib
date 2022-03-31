@@ -25,7 +25,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <project.build.sourceEncoding>windows-1251</project.build.sourceEncoding>
         <!--basic spring version-->
-        <spring.version>5.2.10.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
     </properties>
 
 
