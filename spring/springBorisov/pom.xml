@@ -14,7 +14,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring.version>5.3.1</spring.version>
+        <spring.version>5.3.20</spring.version>
         <servlet.version>4.0.1</servlet.version>
         <javaee.version>8.0.1</javaee.version>
         <javaee-web.version>8.0.1</javaee-web.version>
