@@ -19,7 +19,7 @@
         <javaee.version>8.0.1</javaee.version>
         <javaee-web.version>8.0.1</javaee-web.version>
         <jstl.version>1.2</jstl.version>
-        <mysql-connector.version>8.0.19</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <log4j.version>1.2.17</log4j.version>
     </properties>
 
