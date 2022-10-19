@@ -23,7 +23,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jecson.version>2.12.5</jecson.version>
+        <jecson.version>2.13.4.1</jecson.version>
         <hadoop.version>3.2.1</hadoop.version>
     </properties>
 
